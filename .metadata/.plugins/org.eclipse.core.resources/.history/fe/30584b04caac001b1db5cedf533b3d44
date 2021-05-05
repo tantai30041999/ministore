@@ -1,0 +1,23 @@
+package bean;
+
+import java.sql.Date;
+import java.util.ArrayList;
+
+public class Owner extends User {
+	private ArrayList<Inventory> listInventory;
+
+	public Owner(String userName, String password, String name, Date birthDay, int level, String phoneNumber,
+			String email, String image, boolean active, boolean statusDel, ArrayList<Inventory> listInventory) {
+		super(userName, password, name, birthDay, level, phoneNumber, email, image, active, statusDel);
+	
+	}
+	this.listInventory = listInventory;
+	public ArrayList<Inventory> getListInventory() {
+		return listInventory;
+	}
+
+	public void setListInventory(ArrayList<Inventory> listInventory) {
+		this.listInventory = listInventory;
+	}
+
+}

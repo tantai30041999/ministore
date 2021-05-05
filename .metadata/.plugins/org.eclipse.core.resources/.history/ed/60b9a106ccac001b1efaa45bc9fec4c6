@@ -1,0 +1,27 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import db.ConnectionDB;
+
+public class StoreDAO {
+   public static String getStoreIdLast() {
+	   String idStoreLast = "";
+	   String sql ="select idStore from store oder by idStore limit 1";
+	   Connection con = null;
+	   
+	   try {
+		con  = ConnectionDB.connect();
+		
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	   
+	   return idStoreLast;
+   }
+}

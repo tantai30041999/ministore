@@ -1,0 +1,10 @@
+package util;
+
+public class GenerateID {
+    public String generateIDUser() {
+    	
+    }
+    public String generateIDStore() {
+    	
+    }
+}

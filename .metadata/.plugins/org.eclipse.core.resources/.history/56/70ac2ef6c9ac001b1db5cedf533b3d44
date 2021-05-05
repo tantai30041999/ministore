@@ -1,0 +1,22 @@
+package bean;
+
+import java.sql.Date;
+
+public class Staff extends User {
+
+
+	public Staff(String userName, String password, String name, Date birthDay, int level, String phoneNumber,
+			String email, String image, boolean active, boolean statusDel,double salary) {
+		super(userName, password, name, birthDay, level, phoneNumber, email, image, active, statusDel);
+		this.salary = salary;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+
+}

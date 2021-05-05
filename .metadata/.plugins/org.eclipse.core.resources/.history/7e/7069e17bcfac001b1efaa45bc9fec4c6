@@ -1,0 +1,14 @@
+package util;
+
+import dao.UserDAO;
+
+public class GenerateID {
+    public String generateIDUser() {
+    	String idUserLast = UserDAO.getUserIdLast();
+    	
+    	
+    }
+    public String generateIDStore() {
+    	
+    }
+}
