@@ -1,9 +1,25 @@
 package util;
 
 import dao.StoreDAO;
+import dao.SupplierDAO;
 import dao.UserDAO;
 
 public class GenerateID {
+    public static String generateIDSupplier() {
+    	String idSupplier = "";
+    	String idSupplierLast = SupplierDAO.getLastIdSupplier();
+    	for(int i = idSupplierLast.length() -1 ; i >=0; i--) {
+    		if(idSupplierLast.charAt(i) =='0') {
+    			int number = Integer.parseInt(idSupplierLast.substring(i));
+    		
+    			idSupplier+= idSupplierLast.substring(0, i+1)+(++number);
+    			break;
+    		}
+    		
+    	}
+    	return idSupplier;
+    	
+    }
     public static String generateIDUser() {
     	String idUser = "";
     	String idUserLast = UserDAO.getUserIdLast();
@@ -33,7 +49,7 @@ public class GenerateID {
     	return idStore;
     }
     public static void main(String[] args) {
-    	System.out.println(generateIDUser());
+    	System.out.println(generateIDSupplier());
 		
 	}
 }

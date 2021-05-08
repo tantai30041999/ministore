@@ -1,0 +1,16 @@
+package dao;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import bean.Supplier;
+import db.ConnectionDB;
+
+public class SupplierDAO {
+   public static ArrayList<Supplier> getAllSupplier() {
+	   String sql ="Select * from supplier";
+	   ArrayList<Supplier> listSupplier = null;
+	   Connection con = null;
+	   con = ConnectionDB.connect();
+   }
+}

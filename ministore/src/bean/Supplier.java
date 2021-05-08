@@ -6,13 +6,25 @@ public class Supplier {
     private String address;
     private String phoneNumber;
     private String email;
-	public Supplier(String idSupplier, String nameSupplier, String address, String phoneNumber, String email) {
+    private String idStore;
+    public Supplier () {
+    	
+    }
+	public Supplier( String nameSupplier, String address, String phoneNumber, String email,String idStore) {
+		this.nameSupplier = nameSupplier;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.idStore = idStore;
+	}
+	public Supplier(String idSupplier, String nameSupplier, String address, String phoneNumber, String email,String idStore) {
 		super();
 		this.idSupplier = idSupplier;
 		this.nameSupplier = nameSupplier;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
+		this.idStore = idStore;
 	}
 	public String getIdSupplier() {
 		return idSupplier;
@@ -44,5 +56,17 @@ public class Supplier {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getIdStore() {
+		return idStore;
+	}
+	public void setIdStore(String idStore) {
+		this.idStore = idStore;
+	}
+	@Override
+	public String toString() {
+		return "Supplier [idSupplier=" + idSupplier + ", nameSupplier=" + nameSupplier + ", address=" + address
+				+ ", phoneNumber=" + phoneNumber + ", email=" + email + ", idStore=" + idStore + "]";
+	}
+	
     
 }

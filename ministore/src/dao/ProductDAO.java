@@ -15,6 +15,8 @@ import db.ConnectionDB;
 public class ProductDAO {
 	 public static int productDisplay = 10;
 
+	    
+	 
 	    public static List<Product> getAllProduct() {
 	        String sql = "SELECT * FROM `product` AS p INNER JOIN typeproduct AS tp ON p.idType = tp.idType";
 	        Connection con = null;
@@ -29,11 +31,14 @@ public class ProductDAO {
 	                String nameProduct = rs.getString("nameProduct");
 	                double price = rs.getInt("priceProduct");
 	                double sale = rs.getDouble("sale");
+	                int quantitySell = rs.getInt("quantitySell");
+	                int quantityInStock = rs.getInt("quantityInStock");
 	                String image = rs.getString("image");
 	                String typeProduct = rs.getString("typeName");
 	                Date expiration = rs.getDate("expiration");
 	                boolean active = ((rs.getInt("activeProduct") == 1) ? true : false);
-	                listProduct.add(new Product(idProduct, nameProduct, price, sale, image, typeProduct, expiration, active));
+	                double VAT = rs.getDouble("VAT");
+	                listProduct.add(new Product(idProduct, nameProduct, price,quantitySell,quantityInStock, sale, image, typeProduct, expiration, active, VAT));
 	            }
 	        } catch (ClassNotFoundException e) {
 	            e.printStackTrace();
@@ -61,11 +66,14 @@ public class ProductDAO {
 	            product.setIdProduct(idProduct);
 	            product.setNameProduct(rs.getString("nameProduct"));
 	            product.setPrice(rs.getInt("priceProduct"));
+	            product.setQuantitySale(rs.getInt("quantitySell"));
+	            product.setQuantityInStock(rs.getInt("quantityInStock"));
 	            product.setSale(rs.getDouble("sale"));
 	            product.setImage(rs.getString("image"));
 	            product.setTypeProduct(rs.getString("typeName"));
 	            product.setExpiration(rs.getDate("expiration"));
 	            product.setActive(((rs.getInt("activeProduct") == 1) ? true : false));
+	            product.setVAT(rs.getDouble("VAT"));
 	        } catch (ClassNotFoundException e) {
 	            e.printStackTrace();
 	            System.out.print(e.getMessage());
@@ -95,12 +103,15 @@ public class ProductDAO {
 	                String idProduct = rs.getString("idProduct");
 	                String nameProduct = rs.getString("nameProduct");
 	                double price = rs.getInt("priceProduct");
-	                double sale = rs.getDouble("sale");
+	                int quantitySell = rs.getInt("quantitySell");
+	                int quantityInStock = rs.getInt("quantityInStock");
+	                double sale = rs.getDouble("sale");             
 	                String image = rs.getString("image");
 	                String typeProduct = rs.getString("typeName");
 	                Date expiration = rs.getDate("expiration");
 	                boolean active = ((rs.getInt("activeProduct") == 1) ? true : false);
-	                listProduct.add(new Product(idProduct, nameProduct, price, sale, image, typeProduct, expiration, active));
+	                double VAT = rs.getDouble("VAT");
+	                listProduct.add(new Product(idProduct, nameProduct, price,quantitySell,quantityInStock, sale, image, typeProduct, expiration, active, VAT));
 	            }
 	        } catch (ClassNotFoundException e) {
 	            e.printStackTrace();
@@ -203,6 +214,44 @@ public class ProductDAO {
 	            ConnectionDB.pool.releaseConnection(con);
 	        }
 	    }
+	    public static int countTypeProduct() {
+	    	String sql = "select count(distinct idType) as sumTypeProduct from product;";
+	    	int count = 0;
+	    	Connection con = null;
+	    	try {
+				con = ConnectionDB.connect();
+				PreparedStatement pre = con.prepareStatement(sql);
+				ResultSet rs= pre.executeQuery();
+				rs.last();
+				count = Integer.parseInt(rs.getString("sumTypeProduct"));
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				 ConnectionDB.pool.releaseConnection(con);
+			}
+	    	 ConnectionDB.pool.releaseConnection(con);
+	    	return count;
+	    }
+	    public static int countProductInStock(int range) {
+	    	int count = 0;
+	    	String sql ="select count(*) as sumProductInStock from product  where quantityInStock > ?";
+	    	Connection con = null;
+	    	try {
+				con = ConnectionDB.connect();
+				PreparedStatement pre = con.prepareStatement(sql);
+				pre.setInt(1, range);
+				ResultSet rs = pre.executeQuery();
+				rs.last();
+				
+				count = Integer.parseInt(rs.getString("sumProductInStock"));
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				 ConnectionDB.pool.releaseConnection(con);
+			}
+	    	 ConnectionDB.pool.releaseConnection(con);
+	    	return count;
+	    }
 
 
 	    public static void main(String[] args) {
@@ -211,7 +260,8 @@ public class ProductDAO {
 //	        }
 //	        System.out.println(numberOfPage());
 //	        insertProduct("SP00101","Hello",50000,100,25,Date.valueOf(LocalDate.now()),1,0.0,0.0,"","NCC0053","ST0001","TYPE0008");
-	        removeProduct("SP00101");
+//	        removeProduct("SP00101");
+	    	System.out.println(countProductInStock(0));
 //	        updateProduct("SP00101","Hello World",50000,100,25,Date.valueOf(LocalDate.now()),1,0.0,0.0,"","NCC0053","ST0001","TYPE0008");
 //	        System.out.println(localDate);
 	    }

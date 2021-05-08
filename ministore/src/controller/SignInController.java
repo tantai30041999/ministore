@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.User;
 import dao.SignInDao;
+import util.Util;
 
 
 @WebServlet("/SignInController")
@@ -44,8 +45,11 @@ public class SignInController extends HttpServlet {
 			 user= (User) session.getAttribute("user");
 			 if(user == null) {
 				 if(signInDao.checkSignIn(userName, pass)) {
-					  
-					 response.sendRedirect("index.jsp");
+					
+					 user = SignInDao.getUser(userName, pass);
+					 session = request.getSession(true);
+					 session.setAttribute("user", user);
+					 response.sendRedirect(Util.getFullPath("IndexController"));
 				    
 				 }else {
 					 request.setAttribute("msg", "Tên tài khoản hoặc mật khẩu không chính xác!");

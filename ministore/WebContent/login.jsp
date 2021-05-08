@@ -65,7 +65,7 @@
    
 
       <p class="mb-1 " style="text-align: center;">
-        <a href="" >Quên mật khẩu?</a> &nbsp
+        <a href="<%=Util.getFullPath("forget-password.jsp") %>" >Quên mật khẩu?</a> &nbsp
         <a href="<%=Util.getFullPath("register.jsp") %>" class="text-danger">Đăng ký ngay</a>
       </p>
 
@@ -82,4 +82,6 @@
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte
+<script src="dist/js/adminlte.min.js"></script>
+</body>
+</html>

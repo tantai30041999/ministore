@@ -1,3 +1,6 @@
+<%@page import="util.Util"%>
+<%@page import="bean.User"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -86,8 +89,12 @@
     
       <div class="container">
         <nav class="navbar navbar-default" role="navigation">
-          <span class="navbar-brand">UserName</span>
-          <a class="btn navbar-btn btn-primary navbar-right" role="button" href="#">Đăng xuất</a>
+          <% User user = (User) session.getAttribute("user"); 
+                 if(user != null) {
+          %>
+          <span class="navbar-brand"><%= user.getEmail() %></span>
+          <a class="btn navbar-btn btn-primary navbar-right" role="button" href=<%=Util.getFullPath("Logout") %>>Đăng xuất</a>
+          <% } %>
         </nav>
 
       </div>
@@ -121,7 +128,7 @@
             <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="pages/examples/profile.html" class="d-block">Alexander Pierce</a>
+            <a href=<%=Util.getFullPath("Profile") %> class="d-block"><%= user.getName() %></a>
           </div>
         </div>
 
@@ -152,7 +159,7 @@
 
 
             <li class="nav-item menu-open">
-              <a href="pages/tables/product.html" class="nav-link ">
+              <a href="ProductController" class="nav-link ">
                 <i class="nav-icon fas fa-list-alt"></i>
                 <p>
                   Quản lý sản phẩm
@@ -270,12 +277,14 @@
       <section class="content">
         <div class="container-fluid">
           <!-- Small boxes (Stat box) -->
+          
+          <% ArrayList<Integer> listCount = (ArrayList) request.getAttribute("listCount"); %>
           <div class="row">
             <div class="col-lg-3 col-6">
               <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3>20</h3>
+                  <h3> <%= listCount.get(0)%></h3>
 
                   <p>Loại hàng hóa</p>
                 </div>
@@ -290,7 +299,7 @@
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>30<sup style="font-size: 20px">%</sup></h3>
+                  <h3><%= listCount.get(1)%></h3>
 
                   <p>Nhà cung cấp</p>
                 </div>
@@ -305,7 +314,7 @@
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3>6</h3>
+                  <h3><%= listCount.get(2)%></h3>
 
                   <p>Nhân viên</p>
                 </div>
@@ -320,7 +329,7 @@
               <!-- small box -->
               <div class="small-box bg-danger">
                 <div class="inner">
-                  <h3>15</h3>
+                  <h3><%= listCount.get(3)%></h3>
 
                   <p>Sản phẩm tồn kho</p>
                 </div>

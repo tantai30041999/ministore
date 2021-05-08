@@ -1,0 +1,66 @@
+package dao;
+
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import db.ConnectionDB;
+import util.MD5;
+
+public class UserDAO {
+	   public static String getUserIdLast() {
+		   String idUserLast = "";
+		   String sql ="select idUser  from userstore order by idUser desc  limit 1";
+		   Connection con = null;
+		   
+		   try {
+			con  = ConnectionDB.connect();
+			PreparedStatement pre = con.prepareStatement(sql);
+			ResultSet rs =  pre.executeQuery();
+			while(rs.next()) {
+				idUserLast = rs.getString("idUser");
+			}
+		} catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+			 ConnectionDB.pool.releaseConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			 ConnectionDB.pool.releaseConnection(con);
+		}
+		   ConnectionDB.pool.releaseConnection(con);
+		   return idUserLast ;
+	   }
+	   public static boolean changePass(String email, String pass) throws NoSuchAlgorithmException {
+		   String sql ="update userstore set pass=? where email=?";
+		   Connection con = null;
+		   try {
+			con = ConnectionDB.connect();
+			PreparedStatement pre = con.prepareStatement(sql);
+			
+			pre.setString(1, MD5.convertHashToString(pass));
+			pre.setString(2, email);
+			
+			int update = pre.executeUpdate();
+			if(update == 1) {
+				return true;
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		   
+		   
+		   return false;
+	   }
+	   public static void main(String[] args) throws NoSuchAlgorithmException {
+		System.out.println(changePass("tantaiNTT30@gmail.com", "111111"));
+	}
+}

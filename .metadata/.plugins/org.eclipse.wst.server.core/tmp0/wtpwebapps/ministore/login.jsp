@@ -65,8 +65,8 @@
    
 
       <p class="mb-1 " style="text-align: center;">
-        <a href="" >Quên mật khẩu?</a> &nbsp
-        <a href="" class="text-danger">Đăng ký ngay</a>
+        <a href="<%=Util.getFullPath("forget-password.jsp") %>" >Quên mật khẩu?</a> &nbsp
+        <a href="<%=Util.getFullPath("register.jsp") %>" class="text-danger">Đăng ký ngay</a>
       </p>
 
 

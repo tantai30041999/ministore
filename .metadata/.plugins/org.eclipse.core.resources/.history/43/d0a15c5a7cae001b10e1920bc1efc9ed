@@ -1,0 +1,23 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import bean.Supplier;
+import db.ConnectionDB;
+
+public class SupplierDAO {
+   public static ArrayList<Supplier> getAllSupplier() {
+	   String sql ="Select * from supplier";
+	   ArrayList<Supplier> listSupplier = null;
+	   Connection con = null;
+	   try {
+		con = ConnectionDB.connect();
+	} catch (ClassNotFoundException | SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	   
+   }
+}

@@ -54,6 +54,7 @@ public class OTPController extends HttpServlet {
 			
 			try {
 				
+				request.setCharacterEncoding("UTF-8");
 				SendMail sendMail = new SendMail();
 				OTPGenerate otpMachine = new OTPGenerate();
 				
