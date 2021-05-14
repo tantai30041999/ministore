@@ -1,7 +1,0 @@
-package dao;
-
-public class StoreDAO {
-   public static String getStoreIdLast() {
-	   
-   }
-}

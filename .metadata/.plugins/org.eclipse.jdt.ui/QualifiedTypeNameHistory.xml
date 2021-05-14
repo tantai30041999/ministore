@@ -19,7 +19,6 @@
     <fullyQualifiedTypeName name="bean.Owner"/>
     <fullyQualifiedTypeName name="util.GenerateID"/>
     <fullyQualifiedTypeName name="dao.StoreDAO"/>
-    <fullyQualifiedTypeName name="bean.Product"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
@@ -31,17 +30,20 @@
     <fullyQualifiedTypeName name="dao.SignInDao"/>
     <fullyQualifiedTypeName name="dao.SupplierDAO"/>
     <fullyQualifiedTypeName name="dao.UserDAO"/>
-    <fullyQualifiedTypeName name="java.sql.Connection"/>
-    <fullyQualifiedTypeName name="db.ConnectionDB"/>
-    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="bean.User"/>
     <fullyQualifiedTypeName name="util.Util"/>
-    <fullyQualifiedTypeName name="dao.ProductDAO"/>
     <fullyQualifiedTypeName name="netscape.javascript.JSObject"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="db.ConnectionDB"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="java.lang.Process"/>
+    <fullyQualifiedTypeName name="bean.Product"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="dao.ProductDAO"/>
     <fullyQualifiedTypeName name="com.google.gson.Gson"/>
 </qualifiedTypeNameHistroy>

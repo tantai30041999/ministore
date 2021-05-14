@@ -52,6 +52,45 @@ public class ProductDAO {
 	        ConnectionDB.pool.releaseConnection(con);
 	        return listProduct;
 	    }
+	    
+	    
+	    
+	    public static List<Product> getListProductByName(String nameProduct) {
+	    	String sql ="select * FROM product AS p JOIN typeproduct AS tp ON p.idType = tp.idType  where nameProduct like?";
+	    	Connection con = null;
+	    	Product product = null;
+	    	ArrayList<Product> list = null;
+	    	try {
+				con = ConnectionDB.connect();
+				PreparedStatement pre = con.prepareStatement(sql);
+				pre.setString(1, nameProduct+"%");
+				ResultSet rs = pre.executeQuery();
+				list = new ArrayList<Product>();
+				  while (rs.next()) {
+		                String idProduct = rs.getString("idProduct");
+		                String nameP = rs.getString("nameProduct");
+		                double price = rs.getInt("priceProduct");
+		                double sale = rs.getDouble("sale");
+		                int quantitySell = rs.getInt("quantitySell");
+		                int quantityInStock = rs.getInt("quantityInStock");
+		                String image = rs.getString("image");
+		                String typeProduct = rs.getString("typeName");
+		                Date expiration = rs.getDate("expiration");
+		                boolean active = ((rs.getInt("activeProduct") == 1) ? true : false);
+		                double VAT = rs.getDouble("VAT");
+		                list.add(new Product(idProduct, nameP, price,quantitySell,quantityInStock, sale, image, typeProduct, expiration, active, VAT));
+		            }
+				
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				 ConnectionDB.pool.releaseConnection(con);
+			}
+	    	 ConnectionDB.pool.releaseConnection(con);
+	    	return list;
+	    			
+	    			
+	    }
 
 	    public static Product getProductById(String idProduct) {
 	        String sql = "SELECT * FROM `product` AS p INNER JOIN typeproduct AS tp ON p.idType = tp.idType WHERE p.idProduct = ?";
@@ -261,7 +300,8 @@ public class ProductDAO {
 //	        System.out.println(numberOfPage());
 //	        insertProduct("SP00101","Hello",50000,100,25,Date.valueOf(LocalDate.now()),1,0.0,0.0,"","NCC0053","ST0001","TYPE0008");
 //	        removeProduct("SP00101");
-	    	System.out.println(countProductInStock(0));
+//	    	System.out.println(countProductInStock(0));
+           System.out.println(getListProductByName("MM"));
 //	        updateProduct("SP00101","Hello World",50000,100,25,Date.valueOf(LocalDate.now()),1,0.0,0.0,"","NCC0053","ST0001","TYPE0008");
 //	        System.out.println(localDate);
 	    }
