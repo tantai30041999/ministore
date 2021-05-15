@@ -596,7 +596,7 @@
   	  		            	        '<div class="card">'+
   	  		            	       ' <div class="card-body">'+
   	  		            	        '<span>'+productObject.idProduct+'</span>'  +
-  	  		            	         '<img  style="width: 40px; height: 40px" src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" class="card-img-top"  alt="..." />'+ 
+  	  		            	         '<img  style="width: 40px; height: 40px"'+ 'src=dist/'+productObject.image +'class="card-img-top"  alt="..." />'+ 
   	  		            	       '<span class="col-md-4">'+productObject.nameProduct+'</span>' +  
   	  		            	         ' <a href="#!" class="btn btn-light float-right" ><i class="bi bi-plus"></i ></a>'+
   	  		            	      ' </div>' +

@@ -38,7 +38,8 @@ public class ProductDAO {
 	                Date expiration = rs.getDate("expiration");
 	                boolean active = ((rs.getInt("activeProduct") == 1) ? true : false);
 	                double VAT = rs.getDouble("VAT");
-	                listProduct.add(new Product(idProduct, nameProduct, price,quantitySell,quantityInStock, sale, image, typeProduct, expiration, active, VAT));
+	                boolean activity =rs.getInt("activity")==1 ? true: false;
+	                listProduct.add(new Product(idProduct, nameProduct, price,quantitySell,quantityInStock, sale, image, typeProduct, expiration, active, VAT,activity));
 	            }
 	        } catch (ClassNotFoundException e) {
 	            e.printStackTrace();
@@ -78,7 +79,8 @@ public class ProductDAO {
 		                Date expiration = rs.getDate("expiration");
 		                boolean active = ((rs.getInt("activeProduct") == 1) ? true : false);
 		                double VAT = rs.getDouble("VAT");
-		                list.add(new Product(idProduct, nameP, price,quantitySell,quantityInStock, sale, image, typeProduct, expiration, active, VAT));
+		                boolean activity =rs.getInt("activity")==1 ? true: false;
+		                list.add(new Product(idProduct, nameP, price,quantitySell,quantityInStock, sale, image, typeProduct, expiration, active, VAT,activity));
 		            }
 				
 			} catch (ClassNotFoundException | SQLException e) {
@@ -113,6 +115,7 @@ public class ProductDAO {
 	            product.setExpiration(rs.getDate("expiration"));
 	            product.setActive(((rs.getInt("activeProduct") == 1) ? true : false));
 	            product.setVAT(rs.getDouble("VAT"));
+	            product.setActivity(((rs.getInt("activity")==1 )? true: false));
 	        } catch (ClassNotFoundException e) {
 	            e.printStackTrace();
 	            System.out.print(e.getMessage());
@@ -150,7 +153,8 @@ public class ProductDAO {
 	                Date expiration = rs.getDate("expiration");
 	                boolean active = ((rs.getInt("activeProduct") == 1) ? true : false);
 	                double VAT = rs.getDouble("VAT");
-	                listProduct.add(new Product(idProduct, nameProduct, price,quantitySell,quantityInStock, sale, image, typeProduct, expiration, active, VAT));
+	                boolean activity =rs.getInt("activity")==1 ? true: false;
+	                listProduct.add(new Product(idProduct, nameProduct, price,quantitySell,quantityInStock, sale, image, typeProduct, expiration, active, VAT,activity));
 	            }
 	        } catch (ClassNotFoundException e) {
 	            e.printStackTrace();
@@ -170,8 +174,8 @@ public class ProductDAO {
 	        return result;
 	    }
 
-	    public static void insertProduct(String idProduct, String nameProduct, int priceProduct, int quantityInStock, int quantitySell, Date expiration, int activeProduct, double VAT, double sale, String image, String idSupplier, String idStore, String idType) {
-	        String sql = "INSERT INTO `product` VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	    public static void insertProduct(String idProduct, String nameProduct, int priceProduct, int quantityInStock, int quantitySell, Date expiration, int activeProduct, double VAT, double sale, String image, String idSupplier, String idStore, String idType,int activity) {
+	        String sql = "INSERT INTO `product` VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	        Connection con = null;
 	        try {
 	            con = ConnectionDB.connect();
@@ -189,6 +193,8 @@ public class ProductDAO {
 	            pre.setString(11, idSupplier);
 	            pre.setString(12, idStore);
 	            pre.setString(13, idType);
+	            pre.setInt(14, activity);
+	            
 	            pre.executeUpdate();
 	            System.out.println("Thêm thành công");
 	        } catch (ClassNotFoundException e) {
@@ -222,8 +228,8 @@ public class ProductDAO {
 	        }
 	    }
 
-	    public static void updateProduct(String idProduct, String nameProduct, int priceProduct, int quantityInStock, int quantitySell, Date expiration, int activeProduct, double VAT, double sale, String image, String idSupplier, String idStore, String idType) {
-	        String sql = "UPDATE `product` SET nameProduct = ?, priceProduct = ?, quantityInStock = ?, quantitySell = ?, expiration = ?, activeProduct = ?, VAT = ?, sale = ?, image = ?, idSupplier = ?, idStore = ?, idType = ? WHERE idProduct = ?";
+	    public static void updateProduct(String idProduct, String nameProduct, int priceProduct, int quantityInStock, int quantitySell, Date expiration, int activeProduct, double VAT, double sale, String image, String idSupplier, String idStore, String idType,int activity) {
+	        String sql = "UPDATE `product` SET nameProduct = ?, priceProduct = ?, quantityInStock = ?, quantitySell = ?, expiration = ?, activeProduct = ?, VAT = ?, sale = ?, image = ?, idSupplier = ?, idStore = ?, idType = ?, activity =? WHERE idProduct = ?";
 	        Connection con = null;
 	        try {
 	            con = ConnectionDB.connect();
@@ -240,7 +246,9 @@ public class ProductDAO {
 	            pre.setString(10, idSupplier);
 	            pre.setString(11, idStore);
 	            pre.setString(12, idType);
-	            pre.setString(13, idProduct);
+	            pre.setInt(13, activity);
+	            pre.setString(14, idProduct);
+	            
 	            pre.executeUpdate();
 	            System.out.println("Cập nhập thành công");
 	        } catch (ClassNotFoundException e) {
@@ -291,18 +299,52 @@ public class ProductDAO {
 	    	 ConnectionDB.pool.releaseConnection(con);
 	    	return count;
 	    }
+	    
+	    public static int[] getLimitePage(int pageCurrent) {
+	    	int min = 1;
+	    	int max = numberOfPage();
+	    	
+	    	int[] indexPage = new int[3];
+	    	
+	    	if(pageCurrent == min) {
+	    		indexPage[0] = pageCurrent; // page first
+	    		
+	    		for(int i = 1;i < indexPage.length;i++) {
+	    			 indexPage[i] = ++min;
+	    		}
+	    				
+	    	}else if(pageCurrent == max) {
+	    		indexPage[2] = pageCurrent; // page final;
+	    		for(int i = indexPage.length-1; i>=0; i--) {
+	    			indexPage[i] = --max;
+	    		}
+	    		
+	    	}else {
+	    		indexPage[1] = pageCurrent; // page center;
+	    		indexPage[0] = pageCurrent -1;
+	    		indexPage[2] = pageCurrent +1;
+	    		
+	    		
+	    	}
+	    	return indexPage;
+	    	
+	    
+	    	
+	    }
 
 
 	    public static void main(String[] args) {
-//	        for (Product product : getListProductPage(1)) {
-//	            System.out.println(product);
-//	        }
+//	    	int [] x= getLimitePage(10);
+//	    	for(Integer i : x) {
+//	    		System.out.println(i);
+//	    	}
+	        
 //	        System.out.println(numberOfPage());
-//	        insertProduct("SP00101","Hello",50000,100,25,Date.valueOf(LocalDate.now()),1,0.0,0.0,"","NCC0053","ST0001","TYPE0008");
-//	        removeProduct("SP00101");
+//	        insertProduct("SP00101","Hello",50000,100,25,Date.valueOf(LocalDate.now()),1,0.0,0.0,"","NCC0053","ST0001","TYPE0008",1);
+	        removeProduct("SP00101");
 //	    	System.out.println(countProductInStock(0));
-           System.out.println(getListProductByName("MM"));
-//	        updateProduct("SP00101","Hello World",50000,100,25,Date.valueOf(LocalDate.now()),1,0.0,0.0,"","NCC0053","ST0001","TYPE0008");
+         
+	        updateProduct("SP00101","Hello World",50000,100,25,Date.valueOf(LocalDate.now()),1,0.0,0.0,"","NCC0053","ST0001","TYPE0008",1);
 //	        System.out.println(localDate);
 	    }
 

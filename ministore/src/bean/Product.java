@@ -14,14 +14,15 @@ public class Product {
 	private Date expiration;
 	private boolean active;
 	private double VAT;
+	private boolean activity;
 
 	public Product() {
-		
+
 	}
-	
 
 	public Product(String idProduct, String nameProduct, double price, int quantitySale, int quantityInStock,
-			double sale, String image, String typeProduct, Date expiration, boolean active, double vAT) {
+			double sale, String image, String typeProduct, Date expiration, boolean active, double vAT,
+			boolean activity) {
 		super();
 		this.idProduct = idProduct;
 		this.nameProduct = nameProduct;
@@ -34,20 +35,15 @@ public class Product {
 		this.expiration = expiration;
 		this.active = active;
 		VAT = vAT;
+		this.activity = activity;
 	}
 
+	public boolean isActivity() {
+		return activity;
+	}
 
-	public Product(String idProduct, String nameProduct, double price, double sale, String image, String typeProduct,
-			Date expiration, boolean active) {
-		super();
-		this.idProduct = idProduct;
-		this.nameProduct = nameProduct;
-		this.price = price;
-		this.sale = sale;
-		this.image = image;
-		this.typeProduct = typeProduct;
-		this.expiration = expiration;
-		this.active = active;
+	public void setActivity(boolean activity) {
+		this.activity = activity;
 	}
 
 	public String getIdProduct() {
@@ -113,7 +109,7 @@ public class Product {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
+
 	public int getQuantitySale() {
 		return quantitySale;
 	}
@@ -134,11 +130,9 @@ public class Product {
 		return VAT;
 	}
 
-
 	public void setVAT(double vAT) {
 		VAT = vAT;
 	}
-
 
 	@Override
 	public String toString() {
@@ -146,6 +140,5 @@ public class Product {
 				+ sale + ", image=" + image + ", typeProduct=" + typeProduct + ", expiration=" + expiration
 				+ ", active=" + active + "]";
 	}
-	
 
 }

@@ -1,3 +1,4 @@
+<%@page import="util.Util"%>
 <%@page import="bean.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -251,7 +252,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <%ArrayList<Product> listProduct =(ArrayList<Product>) request.getAttribute("listProduct");
+                    <%
+                   
+                    ArrayList<Product> listProduct =(ArrayList<Product>) request.getAttribute("listProduct");
+                    		
                         for(int i = 0; i < listProduct.size(); i++) {
                     
                     %>
@@ -274,15 +278,57 @@
                     </tfoot>
                   </table>
                 </div>
-                <!-- /.card-body -->
+                       <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+  
+   
+     <% 
+     int[] pageLimit = (int[])request.getAttribute("pageLimit");
+     int totalPage = Integer.parseInt(request.getAttribute("totalPage").toString());
+     int pageShow = Integer.parseInt(request.getAttribute("pageShow").toString());
+     %>
+     
+     <%
+     if(pageShow - 1 == 0) { 
+   	  
+     %>
+     <li class="page-item disabled"> <a class="page-link" href="#" tabindex="-1">Trước</a></li>
+     <%}else {%>
+     
+       <li class="page-item "> <a class="page-link" href=<%=Util.getFullPath("ProductController?page=")+(pageShow-1) %> tabindex="-1">Trước</a></li>
+     <%} %>
+     
+     <% if(pageShow <= totalPage && pageShow > 1) { %>
+         <li class="page-item "><a  class="page-link">...</a></li>
+     <%} %>
+      <% for(int i = 0 ; i < pageLimit.length ; i++) {
+              if((pageLimit[i]) == pageShow) {
+   %>
+   
+    <li class="page-item active"><a   href=<%=Util.getFullPath("ProductController?page=")+(pageLimit[i]) %> class="page-link"><%=pageLimit[i] %></a></li>
+    <%}else { %>
+        <li class="page-item "><a   href=<%=Util.getFullPath("ProductController?page=")+(pageLimit[i]) %> class="page-link"><%=pageLimit[i] %></a></li>
+    <%} %>
+    <%} %>
+    <% if(pageShow >=1){ %>
+     <li class="page-item "><a  class="page-link">...</a></li>
+   <%} %>
+   <% if(pageShow + 1 <= totalPage) { %>
+     <li class="page-item"> <a class="page-link" href=<%=Util.getFullPath("ProductController?page=")+(pageShow+1) %>>Tiếp</a></li>
+   <%} else { %>
+    <li class="page-item disabled"> <a class="page-link" href="#">Tiếp</a></li>
+   <%} %>
+  
+  </ul>
+</nav>
               </div>
             
             </div>
-            <!-- /.col -->
+      
           </div>
-          <!-- /.row -->
+
         </div>
-        <!-- /.container-fluid -->
+  
       </section>
 
 
