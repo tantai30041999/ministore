@@ -34,14 +34,16 @@ public class ProductController extends HttpServlet {
 		 
 		   int totalPage = ProductDAO.numberOfPage();
 		   int[] pageLimit = ProductDAO.getLimitePage(page);
-		   
+		   ArrayList<Product> listProductInStock = (ArrayList<Product>) ProductDAO.getAllProductInStock();
 		  
 		   if(user!= null) {
 			   if(request.getParameter("page") != null) {
 				    page = Integer.parseInt(request.getParameter("page"));
 				    pageLimit = ProductDAO.getLimitePage(page);
 			   }
+			   
 			   ArrayList<Product> listProduct = (ArrayList<Product>) ProductDAO.getListProductPage(page);
+			   request.setAttribute("listProductInStock", listProductInStock);
 			   request.setAttribute("pageLimit", pageLimit);
 			   request.setAttribute("pageShow", page);
 			   request.setAttribute("totalPage",totalPage );

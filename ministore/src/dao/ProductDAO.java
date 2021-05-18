@@ -15,8 +15,78 @@ import db.ConnectionDB;
 public class ProductDAO {
 	 public static int productDisplay = 10;
 
-	    
-	 
+	 public static List<Product> getAllProductInStock() {
+		  String sql = "SELECT * FROM `product` AS p INNER JOIN typeproduct AS tp ON p.idType = tp.idType where activity=0";
+	        Connection con = null;
+	        List<Product> listProduct = null;
+	        try {
+	            con = ConnectionDB.connect();
+	            PreparedStatement pre = con.prepareStatement(sql);
+	            ResultSet rs = pre.executeQuery();
+	            listProduct = new ArrayList<Product>();
+	            while (rs.next()) {
+	                String idProduct = rs.getString("idProduct");
+	                String nameProduct = rs.getString("nameProduct");
+	                double price = rs.getInt("priceProduct");
+	                double sale = rs.getDouble("sale");
+	                int quantitySell = rs.getInt("quantitySell");
+	                int quantityInStock = rs.getInt("quantityInStock");
+	                String image = rs.getString("image");
+	                String typeProduct = rs.getString("typeName");
+	                Date expiration = rs.getDate("expiration");
+	                boolean active = ((rs.getInt("activeProduct") == 1) ? true : false);
+	                double VAT = rs.getDouble("VAT");
+	                boolean activity =rs.getInt("activity")==1 ? true: false;
+	                listProduct.add(new Product(idProduct, nameProduct, price,quantitySell,quantityInStock, sale, image, typeProduct, expiration, active, VAT,activity));
+	            }
+	        } catch (ClassNotFoundException e) {
+	            e.printStackTrace();
+	            System.out.print(e.getMessage());
+	            ConnectionDB.pool.releaseConnection(con);
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            System.out.print(e.getMessage());
+	            ConnectionDB.pool.releaseConnection(con);
+	        }
+	        ConnectionDB.pool.releaseConnection(con);
+	        return listProduct;
+	 }
+	 public static List<Product> getAllProductSale() {
+		  String sql = "SELECT * FROM `product` AS p INNER JOIN typeproduct AS tp ON p.idType = tp.idType where activity=1";
+	        Connection con = null;
+	        List<Product> listProduct = null;
+	        try {
+	            con = ConnectionDB.connect();
+	            PreparedStatement pre = con.prepareStatement(sql);
+	            ResultSet rs = pre.executeQuery();
+	            listProduct = new ArrayList<Product>();
+	            while (rs.next()) {
+	                String idProduct = rs.getString("idProduct");
+	                String nameProduct = rs.getString("nameProduct");
+	                double price = rs.getInt("priceProduct");
+	                double sale = rs.getDouble("sale");
+	                int quantitySell = rs.getInt("quantitySell");
+	                int quantityInStock = rs.getInt("quantityInStock");
+	                String image = rs.getString("image");
+	                String typeProduct = rs.getString("typeName");
+	                Date expiration = rs.getDate("expiration");
+	                boolean active = ((rs.getInt("activeProduct") == 1) ? true : false);
+	                double VAT = rs.getDouble("VAT");
+	                boolean activity =rs.getInt("activity")==1 ? true: false;
+	                listProduct.add(new Product(idProduct, nameProduct, price,quantitySell,quantityInStock, sale, image, typeProduct, expiration, active, VAT,activity));
+	            }
+	        } catch (ClassNotFoundException e) {
+	            e.printStackTrace();
+	            System.out.print(e.getMessage());
+	            ConnectionDB.pool.releaseConnection(con);
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            System.out.print(e.getMessage());
+	            ConnectionDB.pool.releaseConnection(con);
+	        }
+	        ConnectionDB.pool.releaseConnection(con);
+	        return listProduct;
+	 }
 	    public static List<Product> getAllProduct() {
 	        String sql = "SELECT * FROM `product` AS p INNER JOIN typeproduct AS tp ON p.idType = tp.idType";
 	        Connection con = null;
@@ -131,7 +201,7 @@ public class ProductDAO {
 	    public static List<Product> getListProductPage(int indexPage) {
 	        if (indexPage < 1) indexPage = 1;
 	        indexPage = (indexPage - 1) * productDisplay;
-	        String sql = "SELECT * FROM `product` AS p INNER JOIN typeproduct AS tp ON p.idType = tp.idType LIMIT ?,";
+	        String sql = "SELECT * FROM `product` AS p INNER JOIN typeproduct AS tp ON p.idType = tp.idType where activity = 1  LIMIT ?,";
 	        sql += productDisplay;
 	        Connection con = null;
 	        List<Product> listProduct = null;
@@ -170,7 +240,7 @@ public class ProductDAO {
 	    }
 
 	    public static int numberOfPage() {
-	        int result = (ProductDAO.getAllProduct().size() / productDisplay) + 1;
+	        int result = (ProductDAO.getAllProductSale().size() / productDisplay) + 1;
 	        return result;
 	    }
 
@@ -226,6 +296,29 @@ public class ProductDAO {
 	            System.out.print(e.getMessage());
 	            ConnectionDB.pool.releaseConnection(con);
 	        }
+	    }
+	    public static boolean updateProductSale(String idProduct , int quantitiInStock , int quantitySell, int activity) {
+	    	String sql = "UPDATE product set quantityInStock=?, quantitySell=?, activity=? where idProduct=?";
+	    	Connection con = null;
+	    	
+	    	try {
+				con = ConnectionDB.connect();
+				PreparedStatement pre = con.prepareStatement(sql);
+				pre.setInt(1, quantitiInStock);
+				pre.setInt(2, quantitySell);
+				pre.setInt(3, activity);
+				pre.setString(4, idProduct);
+				
+				int update = pre.executeUpdate();
+				if(update == 1) {
+					return true;
+				}
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				  ConnectionDB.pool.releaseConnection(con);
+			}
+	    	return false;
 	    }
 
 	    public static void updateProduct(String idProduct, String nameProduct, int priceProduct, int quantityInStock, int quantitySell, Date expiration, int activeProduct, double VAT, double sale, String image, String idSupplier, String idStore, String idType,int activity) {
@@ -338,13 +431,19 @@ public class ProductDAO {
 //	    	for(Integer i : x) {
 //	    		System.out.println(i);
 //	    	}
+	    	System.out.println(updateProductSale("SP00001", 0, 34,1));
+//	    	for(Product p : getListProductPage(2)) {
+//	    		System.out.println(p.getIdProduct());
+//	    	}
+//	    	System.out.println(getAllProductInStock().size());
 	        
 //	        System.out.println(numberOfPage());
+	    	
 //	        insertProduct("SP00101","Hello",50000,100,25,Date.valueOf(LocalDate.now()),1,0.0,0.0,"","NCC0053","ST0001","TYPE0008",1);
-	        removeProduct("SP00101");
+//	        removeProduct("SP00101");
 //	    	System.out.println(countProductInStock(0));
          
-	        updateProduct("SP00101","Hello World",50000,100,25,Date.valueOf(LocalDate.now()),1,0.0,0.0,"","NCC0053","ST0001","TYPE0008",1);
+//	        updateProduct("SP00101","Hello World",50000,100,25,Date.valueOf(LocalDate.now()),1,0.0,0.0,"","NCC0053","ST0001","TYPE0008",1);
 //	        System.out.println(localDate);
 	    }
 

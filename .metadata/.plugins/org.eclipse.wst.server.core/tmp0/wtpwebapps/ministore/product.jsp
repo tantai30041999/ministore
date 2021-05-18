@@ -342,7 +342,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Thêm sản phẩm</h5>
+          <h5 class="modal-title" id="exampleModalCenterTitle">Thêm sản phẩm bán</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -352,24 +352,31 @@
             <div class="card card-primary">
         
               <div class="card-body">
+               
                 <div class="form-group">
+                <form>
                   <label >Chọn sản phẩm</label>
-                  <select class="form-control">
-                    <option>Chọn sản phẩm</option>
-                    <option>TH true milk</option>
-                    <option>Bánh kẹo</option>
-                    <option>Khăn giấy</option>
+                  <% ArrayList<Product> listProductInStock = (ArrayList)request.getAttribute("listProductInStock"); %>
+                  <select class="form-control" onchange="getDetail(this.value);">
+                   <option value="default" selected="selected">Chọn tên sản phẩm</option>
+                  <% 
+                   for(int i = 0; i< listProductInStock.size(); i++) {
+                  %>
+                    <option value=<%=listProductInStock.get(i).getIdProduct()%>><%= listProductInStock.get(i).getNameProduct() %></option>
+                    <% } %>
+                   
                   </select>
                 </div>
          	
                      <div class="form-group">
-                  <label for="edit-quantityProduct">Số lượng</label>
-                  <input type="number" id="edit-quantityProduct" class="form-control">
+                  <label for="edit-quantityProduct">Số lượng tồn kho</label>
+                  <input type="number" id="saveQuantityInStock" style="visibility: hidden;" >
+                  <input type="number" id="add-quantityInStock" class="form-control" readonly="readonly" >
                 </div>
 
                 <div class="form-group">
                   <label for="edit-quantityProduct">Số lượng</label>
-                  <input type="number" id="edit-quantityProduct" class="form-control">
+                  <input type="number" id="add-quantityProduct" class="form-control" min="0" oninput="checkQuantity()">
                 </div>
         
           
@@ -377,8 +384,9 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-primary">Thêm</button>
+                <input type="submit" class="btn btn-primary" value="Thêm">
               </div>
+              </form>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -471,6 +479,48 @@
   <script src="dist/js/demo.js"></script>
   <!-- Page specific script -->
   <script type="text/javascript">
+  
+ 
+    
+    function checkQuantity() {
+ 
+    	 const quantityInStock = $('#saveQuantityInStock').val();
+    	 
+    	 var inputQuantity = $('#add-quantityProduct').val();
+    	 $('#add-quantityInStock').val(quantityInStock -  inputQuantity);
+    	 
+    	 
+    		 $('#add-quantityProduct').attr({
+    			 "max": quantityInStock
+    		 })
+    	 
+    	  
+    }
+  
+     function getDetail(valueOption) {
+         $.ajax( {
+    		 type:'GET',
+    		 headers : {
+					Accept : "application/json; charset=utf-8",
+					"Content-Type" : "application/json; charset=utf-8"
+				},
+    		 dataType :'json',
+    		 data : {
+    			 idProduct : valueOption,
+             },
+             url :'ProductDetailController',
+             success : function(jsonProduct) {
+            
+            	var quantityInStock = jsonProduct.quantityInStock;
+                $('#add-quantityInStock').val(quantityInStock);
+                $('#saveQuantityInStock').val(quantityInStock);
+            
+               
+            	
+             }
+    		 
+    	 })
+     }
    
     
      function showDetail(idProduct) {
