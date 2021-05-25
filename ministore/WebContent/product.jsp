@@ -10,200 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sản phẩm</title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   </head>
   <body class="hold-transition sidebar-mini">
   <div class="wrapper">
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-expand-arrows-alt"></i></a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="" class="nav-link">Quản lý sản phẩm</a>
-        </li>
-      </ul>
-      <!-- Right navbar links -->
-      <ul class="navbar-nav ml-auto">
-        <div class="container">
-          <nav class="navbar navbar-default" role="navigation">
-            <span class="navbar-brand">UserName</span>
-            <a class="btn navbar-btn btn-primary navbar-right" role="button" href="#">Đăng xuất</a>
-          </nav>
 
-        </div>
-      </ul>
-    </nav>
-    <!-- /.navbar -->
-
-    <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
-      <a href="../../index3.html" class="brand-link">
-        <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
-      </a>
-
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-          </div>
-          <div class="info">
-            <a href="#" class="d-block">Alexander Pierce</a>
-          </div>
-        </div>
-
-    
-
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-              <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                  with font-awesome or any other icon font library -->
-                <li class="nav-item menu-open">
-                  <a href="./index.html" class="nav-link active">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                    Trang chủ
-                    </p>
-                  </a>
-                </li>
-    
-                <li class="nav-item menu-open">
-                  <a href="./index.html" class="nav-link ">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                      Bán hàng
-                    </p>
-                  </a>
-                </li>
-    
-    
-                <li class="nav-item menu-open">
-                  <a href="./index.html" class="nav-link ">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                      Quản lý sản phẩm
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-chart-pie"></i>
-                    <p>
-                      Quản lý kho
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Xem kho hàng</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Nhập kho</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Xuất kho</p>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-    
-                <li class="nav-item menu-open">
-                  <a href="./index.html" class="nav-link ">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                      Quản lý nhà cung cấp
-                    </p>
-                  </a>
-                </li>
-    
-                <li class="nav-item menu-open">
-                  <a href="./index.html" class="nav-link ">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                      Quản lý nhân viên
-                    </p>
-                  </a>
-                </li>
-    
-                <li class="nav-item menu-open">
-                  <a href="./index.html" class="nav-link ">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                      Quản lý hóa đơn
-                    </p>
-                  </a>
-                </li>
-    
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-chart-pie"></i>
-                    <p>
-                      Thống kê
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Doanh thu</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Hàng tồn kho</p>
-                      </a>
-                    </li>
-    
-                  </ul>
-                </li>
-    
-                <li class="nav-item menu-open">
-                  <a href="./index.html" class="nav-link ">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                      Báo cáo
-                    </p>
-                  </a>
-                </li>
-    
-    
-    
-    
-              </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-      </div>
-      <!-- /.sidebar -->
-    </aside>
-
-    
+      <%@ include file="header.jsp" %>
+ 
     
 
     <!-- Content Wrapper. Contains page content -->
@@ -267,9 +80,9 @@
                       <td>
 
                         <a href="#" class=" btn-primary btn-lg" role="button" aria-pressed="true" data-toggle="modal" onclick="return showDetail('<%=listProduct.get(i).getIdProduct() %>')" data-target="#editproduct"><i class="fas fa-edit"></i></a>
-                        <a href="#" class=" btn-danger btn-lg" role="button" aria-pressed="true" ><i class="fas fa-trash-alt"></i></a>
+                        <a  onclick="return confirm('Bạn có chắc chắn muốn xóa?')" href=<%= Util.getFullPath("RemoveProductController?idProduct=")+listProduct.get(i).getIdProduct() %> class=" btn-danger btn-lg" role="button" aria-pressed="true" ><i class="fas fa-trash-alt"></i></a>
 
-                    
+                   
                       </td>
                     </tr>
                     <% } %>
@@ -354,14 +167,16 @@
               <div class="card-body">
                
                 <div class="form-group">
-                <form>
+                <form action=<%=Util.getFullPath("AddProductSale") %> method="POST">
                   <label >Chọn sản phẩm</label>
                   <% ArrayList<Product> listProductInStock = (ArrayList)request.getAttribute("listProductInStock"); %>
-                  <select class="form-control" onchange="getDetail(this.value);">
+                 
+                  <select class="form-control" name="idProduct" onchange="getDetail(this.value);">
                    <option value="default" selected="selected">Chọn tên sản phẩm</option>
                   <% 
                    for(int i = 0; i< listProductInStock.size(); i++) {
                   %>
+                  
                     <option value=<%=listProductInStock.get(i).getIdProduct()%>><%= listProductInStock.get(i).getNameProduct() %></option>
                     <% } %>
                    
@@ -371,12 +186,12 @@
                      <div class="form-group">
                   <label for="edit-quantityProduct">Số lượng tồn kho</label>
                   <input type="number" id="saveQuantityInStock" style="visibility: hidden;" >
-                  <input type="number" id="add-quantityInStock" class="form-control" readonly="readonly" >
+                  <input type="number"  id="add-quantityInStock" class="form-control" readonly="readonly" >
                 </div>
 
                 <div class="form-group">
                   <label for="edit-quantityProduct">Số lượng</label>
-                  <input type="number" id="add-quantityProduct" class="form-control" min="0" oninput="checkQuantity()">
+                  <input type="number" id="add-quantityProduct" name="quantityAddSell" class="form-control" min="0" oninput="checkQuantity()">
                 </div>
         
           
@@ -412,30 +227,42 @@
             <div class="col-md-12">
               <div class="card card-primary">
           
+          <form action=<%= Util.getFullPath("EditProductSellController") %> method="POST">
                 <div class="card-body">
           	  <div class="form-group">
                   <label for="idProduct">Mã sản phẩm</label>
-                  <input type="text" id="idProduct" class="form-control" readonly="readonly">
+                  <input type="text" id="idProduct"  name="idProductE" class="form-control" readonly="readonly">
                 </div>
                 	  <div class="form-group">
                   <label for="nameProduct">Tên sản phẩm</label>
                   <input type="text" id="nameProduct" class="form-control" readonly="readonly">
                 </div>
-    
+     				 <div class="form-group">
+                    <label for="quantityProduct">Số lượng tồn kho</label>
+                    <input type="hidden" id="save-QuantityInStock" >
+                    <input type="number" id="quantityInStock" class="form-control" readonly="readonly">
+                  </div>
                   <div class="form-group">
-                    <label for="quantityProduct">Số lượng</label>
-                    <input type="number" id="quantityProduct" class="form-control">
+                    <label for="quantityProduct">Số lượng đang bán</label>
+                      <input type="hidden" id="save-quantityProduct" >
+                    <input type="number" id="quantityProduct" class="form-control" readonly="readonly">
                   </div>
           
+               <div class="form-group">
+                    <label for="quantityProduct">Số lượng nhập thêm từ kho</label>
+                    <input type="number" id="quantityInput" name="quantityInput" class="form-control" oninput=" handleIncreateQuantity()">
+                  </div>
                   <div class="form-group">
                     <label for="price">Giá(VND)</label>
-                    <input type="number" id="price" class="form-control">
+                    <input type="number" id="price" class="form-control" readonly="readonly">
                   </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                  <button type="button" class="btn btn-primary">Cập nhật</button>
+                  <input type="submit" class="btn btn-primary" value="Cập nhật">
                 </div>
+                
+              </form>  
                 <!-- /.card-body -->
               </div>
               <!-- /.card -->
@@ -456,31 +283,10 @@
   </div>
   <!-- ./wrapper -->
 
-  <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- DataTables  & Plugins -->
-  <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-  <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-  <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-  <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-  <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-  <script src="plugins/jszip/jszip.min.js"></script>
-  <script src="plugins/pdfmake/pdfmake.min.js"></script>
-  <script src="plugins/pdfmake/vfs_fonts.js"></script>
-  <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-  <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
-  <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="dist/js/demo.js"></script>
-  <!-- Page specific script -->
+
   <script type="text/javascript">
   
- 
+
     
     function checkQuantity() {
  
@@ -521,6 +327,18 @@
     		 
     	 })
      }
+     
+     function handleIncreateQuantity() {
+    	 
+    	 const quantityInStock = $('#save-QuantityInStock').val();
+    	 const quantitySale = $('#save-quantityProduct').val();
+    	 var inputQuantity = $('#quantityInput').val();
+    	 
+    	 var tmp = parseInt(quantitySale) + parseInt(inputQuantity);
+    	 console.log(tmp)
+    	 $('#quantityInStock').val(quantityInStock -  inputQuantity);
+    	 $('#quantityProduct').val(tmp);
+     }
    
     
      function showDetail(idProduct) {
@@ -541,11 +359,20 @@
             	var nameProduct = jsonProduct.nameProduct;
             	var quantitySale = jsonProduct.quantitySale;
             	var priceSale = jsonProduct.price;
+            	var quantityInStock = jsonProduct.quantityInStock;
 
                  $('#idProduct').val(idProduct);
                  $('#nameProduct').val(nameProduct);
                  $('#quantityProduct').val(quantitySale);
                  $('#price').val(priceSale);
+                 $('#quantityInStock').val(quantityInStock);
+                 $('#save-QuantityInStock').val(quantityInStock);
+                 $('#save-quantityProduct').val(quantitySale);
+                 $('#quantityInput').attr({
+                	 "min": 0,
+                	 "max" : quantityInStock
+                 })  
+                 
             	
              }
     		 

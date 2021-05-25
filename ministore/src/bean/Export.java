@@ -1,52 +1,67 @@
 package bean;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Export {
-	private String idExport;
-	private String season;
-	private Date exportDate;
-	private Detail exportDetail;
+	  private String idExport;
+	    private String reason;
+	    private Date exportDate;
+	    private List<Detail> exportDetail;
 
-	public Export(String idExport,String season, Date exportDate, Detail exportDetail) {
-		super();
-		this.idExport = idExport;
-		this.season = season;
-		this.exportDate = exportDate;
-		this.exportDate = exportDate;
-	}
+	    public Export(){
 
-	public String getSeason() {
-		return season;
-	}
+	    }
 
-	public void setSeason(String season) {
-		this.season = season;
-	}
+	    public Export(String idExport, String reason, Date exportDate, List<Detail> exportDetail) {
+	        super();
+	        this.idExport = idExport;
+	        this.reason = reason;
+	        this.exportDate = exportDate;
+	        this.exportDate = exportDate;
+	    }
 
-	public String getIdExport() {
-		return idExport;
-	}
+	    public String getReason() {
+	        return reason;
+	    }
 
-	public void setIdExport(String idExport) {
-		this.idExport = idExport;
-	}
+	    public void setReason(String reason) {
+	        this.reason = reason;
+	    }
 
-	public Date getExportDate() {
-		return exportDate;
-	}
+	    public String getIdExport() {
+	        return idExport;
+	    }
 
-	public void setExportDate(Date exportDate) {
-		this.exportDate = exportDate;
-	}
+	    public void setIdExport(String idExport) {
+	        this.idExport = idExport;
+	    }
 
-	public Detail getExportDetail() {
-		return exportDetail;
-	}
+	    public Date getExportDate() {
+	        return exportDate;
+	    }
 
-	public void setExportDetail(Detail exportDetail) {
-		this.exportDetail = exportDetail;
-	}
-	
+	    public void setExportDate(Date exportDate) {
+	        this.exportDate = exportDate;
+	    }
+
+	    public List<Detail> getExportDetail() {
+	        return exportDetail;
+	    }
+
+	    public void setExportDetail(List<Detail> exportDetail) {
+	        this.exportDetail = exportDetail;
+	    }
+
+
+	    @Override
+	    public String toString() {
+	        return "Export{" +
+	                "idExport='" + idExport + '\'' +
+	                ", reason='" + reason + '\'' +
+	                ", exportDate=" + exportDate +
+	                ", exportDetail=" + exportDetail.toString() +
+	                '}';
+	    }
 
 }

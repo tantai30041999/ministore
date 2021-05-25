@@ -13,7 +13,7 @@ public class BasicConnectionPool implements ConnectionPool {
 	private String password;
 	private List<Connection> connectionPool;
 	private List<Connection> usedConnections = new ArrayList<>();
-	private static int INITIAL_POOL_SIZE = 10;
+	private static int INITIAL_POOL_SIZE = 20;
 
 	public static BasicConnectionPool create(String url, String user, String password)
 			throws SQLException, ClassNotFoundException {

@@ -15,10 +15,36 @@ public class Product {
 	private boolean active;
 	private double VAT;
 	private boolean activity;
+	private int quantityPurchase;
 
 	public Product() {
 
 	}
+	
+
+
+
+	public Product(String idProduct, String nameProduct, double price, int quantitySale, int quantityInStock,
+			double sale, String image, String typeProduct, Date expiration, boolean active, double vAT,
+			boolean activity, int quantityPurchase) {
+		super();
+		this.idProduct = idProduct;
+		this.nameProduct = nameProduct;
+		this.price = price;
+		this.quantitySale = quantitySale;
+		this.quantityInStock = quantityInStock;
+		this.sale = sale;
+		this.image = image;
+		this.typeProduct = typeProduct;
+		this.expiration = expiration;
+		this.active = active;
+		VAT = vAT;
+		this.activity = activity;
+		this.quantityPurchase = quantityPurchase;
+	}
+
+
+
 
 	public Product(String idProduct, String nameProduct, double price, int quantitySale, int quantityInStock,
 			double sale, String image, String typeProduct, Date expiration, boolean active, double vAT,
@@ -37,10 +63,21 @@ public class Product {
 		VAT = vAT;
 		this.activity = activity;
 	}
+	
 
 	public boolean isActivity() {
 		return activity;
 	}
+
+	public int getQuantityPurchase() {
+		return quantityPurchase;
+	}
+
+
+	public void setQuantityPurchase(int quantityPurchase) {
+		this.quantityPurchase = quantityPurchase;
+	}
+
 
 	public void setActivity(boolean activity) {
 		this.activity = activity;
@@ -138,7 +175,8 @@ public class Product {
 	public String toString() {
 		return "Product [idProduct=" + idProduct + ", nameProduct=" + nameProduct + ", price=" + price + ", sale="
 				+ sale + ", image=" + image + ", typeProduct=" + typeProduct + ", expiration=" + expiration
-				+ ", active=" + active + "]";
+				+ ", active=" + active + ", VAT=" + VAT + ", activity=" + activity + ", quantityPurchase="
+				+ quantityPurchase + "]";
 	}
 
 }

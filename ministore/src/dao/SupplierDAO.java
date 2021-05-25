@@ -11,6 +11,18 @@ import db.ConnectionDB;
 import util.GenerateID;
 
 public class SupplierDAO {
+	
+	
+	public static ArrayList<Integer> getCountProductBySp(ArrayList<Supplier> listSp) throws ClassNotFoundException, SQLException {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		for(int i = 0; i < listSp.size(); i++) {
+			int tmp = ProductDAO.countProductByIdSupplier(listSp.get(i).getIdSupplier());
+			list.add(tmp);
+		}
+		
+		return list;
+	}
 	public static ArrayList<Supplier> getAllSupplier() {
 		ArrayList<Supplier> listSupplier = null;
 		String sql = "select * from supplier";
@@ -167,7 +179,7 @@ public class SupplierDAO {
 	}
 
 	public static void main(String[] args) {
-		Supplier s = new Supplier ("ABCD", "A", "123445", "@gmail.com", "ST0001");
-		System.out.println(updateSupplier(s,"NCC0054"));
+		System.out.println(getAllSupplier().size());
+		
 	}
 }

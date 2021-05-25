@@ -1,62 +1,76 @@
 package bean;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Import {
-	private String idImport;
-	private Date importDate;
-	private double totalCost;
-	private boolean statusPayment;
-	private Detail importDetail;
+	  private String idImport;
+	    private Date importDate;
+	    private double totalCost;
+	    private boolean statusPayment;
+	    private List<Detail> importDetail;
 
-	public Import(String idImport, Date importDate, double totalCost, boolean statusPayment, Detail importDetail) {
-		super();
-		this.idImport = idImport;
-		this.importDate = importDate;
-		this.totalCost = totalCost;
-		this.statusPayment = statusPayment;
-		this.importDetail = importDetail;
-	}
+	    public Import(){
 
-	public String getIdImport() {
-		return idImport;
-	}
+	    }
+	    public Import(String idImport, Date importDate, double totalCost, boolean statusPayment, List<Detail> importDetail) {
+	        super();
+	        this.idImport = idImport;
+	        this.importDate = importDate;
+	        this.totalCost = totalCost;
+	        this.statusPayment = statusPayment;
+	        this.importDetail = importDetail;
+	    }
 
-	public void setIdImport(String idImport) {
-		this.idImport = idImport;
-	}
+	    public String getIdImport() {
+	        return idImport;
+	    }
 
-	public Date getImportDate() {
-		return importDate;
-	}
+	    public void setIdImport(String idImport) {
+	        this.idImport = idImport;
+	    }
 
-	public void setImportDate(Date importDate) {
-		this.importDate = importDate;
-	}
+	    public Date getImportDate() {
+	        return importDate;
+	    }
 
-	public double getTotalCost() {
-		return totalCost;
-	}
+	    public void setImportDate(Date importDate) {
+	        this.importDate = importDate;
+	    }
 
-	public void setTotalCost(double totalCost) {
-		this.totalCost = totalCost;
-	}
+	    public double getTotalCost() {
+	        return totalCost;
+	    }
 
-	public boolean isStatusPayment() {
-		return statusPayment;
-	}
+	    public void setTotalCost(double totalCost) {
+	        this.totalCost = totalCost;
+	    }
 
-	public void setStatusPayment(boolean statusPayment) {
-		this.statusPayment = statusPayment;
-	}
+	    public boolean isStatusPayment() {
+	        return statusPayment;
+	    }
 
-	public Detail getImportDetail() {
-		return importDetail;
-	}
+	    public void setStatusPayment(boolean statusPayment) {
+	        this.statusPayment = statusPayment;
+	    }
 
-	public void setImportDetail(Detail importDetail) {
-		this.importDetail = importDetail;
-	}
+	    public List<Detail> getImportDetail() {
+	        return importDetail;
+	    }
 
+	    public void setImportDetail(List<Detail> importDetail) {
+	        this.importDetail = importDetail;
+	    }
+
+	    @Override
+	    public String toString() {
+	        return "Import{" +
+	                "idImport='" + idImport + '\'' +
+	                ", importDate=" + importDate +
+	                ", totalCost=" + totalCost +
+	                ", statusPayment=" + statusPayment +
+	                ", importDetail=" + importDetail.toString() +
+	                '}';
+	    }
 	
 }

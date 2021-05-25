@@ -16,7 +16,9 @@ public abstract class User {
 
 
 
-
+  public User() {
+	  
+  }
 
 	public User(String email, String password, String name, Date birthDay, int level, String phoneNumber, String image,
 			boolean active, String idStore, String idSalary) {

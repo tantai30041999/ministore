@@ -10,6 +10,9 @@ public class Owner extends User {
 		super(email, password, name, birthDay, level, phoneNumber, image, active, idStore, idSalary);
 		this.listInventory = listInventory;
 	}
+	public Owner() {
+		
+	}
 
 
 	

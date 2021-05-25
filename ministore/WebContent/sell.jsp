@@ -1,214 +1,21 @@
+<%@page import="bean.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bán hàng</title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
-    />
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="plugins/fontawesome-free/css/all.min.css"
-    />
-    <!-- DataTables -->
-    <link
-      rel="stylesheet"
-      href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css"
-    />
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.min.css" />
-    <!-- Bootstrap icon -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-    />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-      <!-- Navbar -->
-      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#" role="button"
-              ><i class="fas fa-expand-arrows-alt"></i
-            ></a>
-          </li>
-          <li class="nav-item d-none d-sm-inline-block">
-            <a href="" class="nav-link">Bán hàng</a>
-          </li>
-        </ul>
-
-        <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-          <div class="container">
-            <nav class="navbar navbar-default" role="navigation">
-              <span class="navbar-brand">UserName</span>
-              <a
-                class="btn navbar-btn btn-primary navbar-right"
-                role="button"
-                href="#"
-                >Đăng xuất</a
-              >
-            </nav>
-          </div>
-        </ul>
-      </nav>
-      <!-- /.navbar -->
-
-      <!-- Main Sidebar Container -->
-      <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <!-- Brand Logo -->
-        <a href="../../index3.html" class="brand-link">
-          <img
-            src="../../dist/img/AdminLTELogo.png"
-            alt="AdminLTE Logo"
-            class="brand-image img-circle elevation-3"
-            style="opacity: 0.8"
-          />
-          <span class="brand-text font-weight-light">AdminLTE 3</span>
-        </a>
-
-        <!-- Sidebar -->
-        <div class="sidebar">
-          <!-- Sidebar user panel (optional) -->
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-              <img
-                src="dist/img/user2-160x160.jpg"
-                class="img-circle elevation-2"
-                alt="User Image"
-              />
-            </div>
-            <div class="info">
-              <a href="#" class="d-block">Alexander Pierce</a>
-            </div>
-          </div>
-
-          <!-- Sidebar Menu -->
-          <nav class="mt-2">
-            <ul
-              class="nav nav-pills nav-sidebar flex-column"
-              data-widget="treeview"
-              role="menu"
-              data-accordion="false"
-            >
-              <li class="nav-item menu-open">
-                <a href="./index.html" class="nav-link active">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Trang chủ</p>
-                </a>
-              </li>
-
-              <li class="nav-item menu-open">
-                <a href="./index.html" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Bán hàng</p>
-                </a>
-              </li>
-
-              <li class="nav-item menu-open">
-                <a href="./index.html" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Quản lý sản phẩm</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-chart-pie"></i>
-                  <p>
-                    Quản lý kho
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Xem kho hàng</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Nhập kho</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Xuất kho</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="nav-item menu-open">
-                <a href="./index.html" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Quản lý nhà cung cấp</p>
-                </a>
-              </li>
-
-              <li class="nav-item menu-open">
-                <a href="./index.html" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Quản lý nhân viên</p>
-                </a>
-              </li>
-
-              <li class="nav-item menu-open">
-                <a href="./index.html" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Quản lý hóa đơn</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-chart-pie"></i>
-                  <p>
-                    Thống kê
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Doanh thu</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Hàng tồn kho</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </nav>
-          <!-- /.sidebar-menu -->
-        </div>
-        <!-- /.sidebar -->
-      </aside>
-
+    <%@ include file="header.jsp" %>
+   
+   
+   
+   
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -251,27 +58,19 @@
                 </div>
                 <div class="card-body">
                   <div class="form-group">
-                    <div class="card">
-                      <div class="card-body">
-                        <span>ST200</span>
-                        <img
-                          style="width: 40px; height: 40px"
-                          src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                          class="card-img-top"
-                          alt="..."
-                        />
-                        <span class="col-md-4">Tên sản phẩm</span>
-                        <input type="number" style="width: 60px" />
-                        <span style="margin-left: 20px">100.000</span>
-                        <span>VND</span>
-                        <a href="#!" class="btn btn-light float-right"
-                          ><i class="far fa-trash-alt"></i
-                        ></a>
-                      </div>
+                    <div class="card" id="containerListProduct">
+           
+           
+             <!-- TODO -->
+           
+           
+           
                     </div>
                   </div>
-                  <a href="#!" class="btn btn-danger">Xóa tất cả</a>
-                  <a href="#!" class="btn btn-primary float-right">Hoàn tất</a>
+                  <div id="removeProduct">
+                  
+                  </div>
+                 
                 </div>
               </div>
             </div>
@@ -288,7 +87,7 @@
                       <div class="col-12">
                         <h4>
                           <i class="fas fa-globe"></i> AdminLTE, Inc.
-                          <small class="float-right">07/04/2021 (Thứ tư)</small>
+                          <small class="float-right"><span style="font-size: 15px" id="bill-at"></span></small>
                         </h4>
                       </div>
                       <!-- /.col -->
@@ -297,7 +96,7 @@
                     <div class="row invoice-info">
                       <div class="col-sm-4 invoice-col">
                         <address>
-                          795 Folsom Ave, Suite 600 San Francisco, CA 94107<br />
+                         KTX khu B, DHQG.TPHCM, Dĩ An- Bình Dương<br />
                           Tel: (804) 123-5432<br />
                         </address>
                       </div>
@@ -311,7 +110,7 @@
                       </div>
                       <!-- /.col -->
                       <div class="col-sm-4 invoice-col">
-                        <b>Mã hóa đơn #007612</b><br />
+                        <b id="idBill" style="float: right;"></b><br />
                       </div>
                       <!-- /.col -->
                     </div>
@@ -331,15 +130,8 @@
                               <th>Thành tiền</th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td>SP100</td>
-                              <td>Sting</td>
-
-                              <td>15</td>
-                              <td>150.000</td>
-                            </tr>
+                          <tbody id="bodyBill">
+                         
                           </tbody>
                         </table>
                       </div>
@@ -372,17 +164,17 @@
                           <table class="table" id="tableBill">
                             <tr>
                               <th style="width: 50%">Tạm tính:</th>
-                              <td>150.000<span>VND</span></td>
+                              <td ><span id="totalTmp"></span><span>VND</span></td>
                             </tr>
 
                             <tr>
                               <th>VAT:</th>
-                              <td>1%</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <th>Tổng cộng:</th>
                               <td>
-                                <span id="total">150000</span><span>VND</span>
+                                <span id="total"></span><span>VND</span>
                               </td>
                             </tr>
 
@@ -407,7 +199,8 @@
                       </p>
                       <br />
                       <div class="col-12 float-right">
-                        <p class="float-right">Thu ngân #02732</p>
+                       <% User use = (User) session.getAttribute("user"); %>
+                        <p class="float-right">Thu ngân:&nbsp <b><%=use.getEmail() %></b> </p>
                         <br />
                       </div>
                     </div>
@@ -418,22 +211,8 @@
 
                     <!-- this row will not appear when printing -->
                     <div class="row no-print">
-                      <div class="col-12">
-                        <a
-                          href="printBill.html"
-                          rel="noopener"
-                          target="_blank"
-                          class="btn btn-default"
-                          ><i class="fas fa-print"></i> Print</a
-                        >
-                        <button
-                          type="button"
-                          class="btn btn-success float-right"
-                          data-toggle="modal"
-                          data-target="#paymentBill"
-                        >
-                          <i class="far fa-credit-card"></i>Thanh toán
-                        </button>
+                      <div class="col-12" id="div-option">
+                   
                       </div>
                     </div>
                   </div>
@@ -475,22 +254,21 @@
                   <div class="card-body">
                     <div class="form-group">
                       <span><b>Hình thức</b></span>
-                      <select
-                        class="form-control"
-                        id="typePayment"
-                        onchange="hidePayment()"
-                      >
+                      <select class="form-control" id="typePayment"  onchange="hidePayment()">
                         <option value="paypal">Paypal</option>
                         <option value="cash">Tiền mặt</option>
                       </select>
                     </div>
+                    <span id="totalPayment" style="display: none"></span>
                     <div class="form-group" id="showCash" style="display: none">
                       <label for="money">Tiền mặt(VND)</label>
                       <input type="number" id="money" class="form-control" />
+                      <p id="err"></p>
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button class="btn-primary" data-dismiss="modal">
+                    <button class="btn-primary" id="btnPayment" onclick="checkValidation()">
+                    
                       Tiến hành thanh toán
                     </button>
                   </div>
@@ -508,37 +286,108 @@
       </aside>
       <!-- /.control-sidebar -->
     </div>
-    <!-- ./wrapper -->
 
-    <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="plugins/jszip/jszip.min.js"></script>
-    <script src="plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js"></script>
-    <!-- Page specific script -->
-    <script>
+    <script charset="UTF-8">
     
-  
+    function paymentSubmit() {
+    	var totalBill = $('#savePriceBill').text();
+    	
+    	$('#totalPayment').text(totalBill);
+    	
+    }
     
-    function searchProduct(inputValue) {
-        if(inputValue.length> 0) {
-		   	  $.ajax ({
+    function checkValidation() {
+    	
+    	var typePayment =$('#typePayment').val();
+    	if(typePayment =="cash") {
+   
+    		  var numberOfMoney = $('#money').val();
+    		
+    	     console.log(numberOfMoney);
+    		
+    	     if(numberOfMoney == "") {
+    	    	$('#err').css('color','red');
+      		   $('#err').text('Tiền nhận phải >= số tiền nợ trong hóa đơn!')
+    	     }else {
+    	    	  var totalBill =$('#totalPayment').text();
+    	    	    var tmp = parseInt(numberOfMoney) - parseInt(totalBill);
+    	    		if(tmp < 0) {
+    	    			
+    	    			
+    	        		   $('#err').css('color','red');
+    	        		   $('#err').text('Tiền nhận phải >= số tiền nợ trong hóa đơn!')
+    	        	}else {
+    	        		if(tmp >= 0) {
+    	        			createBill();
+    	        			 $('#err').text('')
+    	             		$('#btnPayment').attr("data-dismiss","modal");	
+    	        			 
+    	        			  $('#btnStartPayment').remove();
+    	              		  $('#div-option').append(
+    	             				   
+    	               				'<a class="btn btn-primary float-right" href="SellProductController" role="button">Hoàn tất</a>'
+    	               		   
+    	               		   )
+    	        		}
+    		
+    	        	}
+    	     }
+    
+    	}
+    
+    }
+    
+    function checkQuantity(inputUser, maxQuantity, priceDf, priceProduct) {
+        var input = $('#'+inputUser).val();
+        const price = $('#'+priceDf).text();
+     
+        
+       $('#'+priceProduct).text(price*input);
+    	var max = $("#"+maxQuantity).text();
+    
+         $('#'+inputUser).attr({
+        	 "max": max
+         })
+    }
+    /*
+    
+    
+    */
+    function addProduct(idProduct) {
+    	$.ajax ({
+    		type:'GET',
+    			headers : {
+				 	Accept : "application/json; charset=utf-8",
+					"Content-Type" : "application/json; charset=utf-8"
+				},
+				
+ 		 		dataType :'json',
+ 		 		data : {
+ 		 			idProduct : idProduct
+ 		 		},
+ 		 		url :'AddProductBillCurrent',
+ 		 		success : function(jsonData) {
+ 		 			
+ 		 			$('#containerListProduct').empty();
+ 		 			loadProductBill();
+ 		 		}
+			
+    		
+    	})
+    	
+    
+    }
+    
+    function randomIdBill() {
+    	 var idBill="" ;
+         for(let i = 0; i < 7; i++) {
+           var x = Math.floor((Math.random() * 10));
+           idBill+=x;
+         }
+         return idBill;
+    }
+    function removeAllProduct() {
+		  $.ajax ({
 		  		 
 	    		 type:'GET',
 	    		 headers : {
@@ -547,25 +396,199 @@
 					},
 	    		 dataType :'json',
 	    		 data : {
-	    			 nameProduct : inputValue,
+	    			statusProduct : "removeAll",
 	             },
-	             url :'SearchProductController',
+	             url :'RemoveProductBill',
 	             success : function(jsonProduct) {
-
-	            	for(var i = 0 ; i < jsonProduct.length; i++ ) {
-	            	    var productObject =  jsonProduct[i];
-	            	    console.log(productObject);
-	            	}
+	            	loadProductBill() ;
+                
 	            	
-	             }
-
-          }) 
-		     }
+	             }		
+ 	})
     }
+    function removeProduct(status) {
+    		  $.ajax ({
+ 		  		 
+ 	    		 type:'GET',
+ 	    		 headers : {
+ 						Accept : "application/json; charset=utf-8",
+ 						"Content-Type" : "application/json; charset=utf-8"
+ 					},
+ 	    		 dataType :'json',
+ 	    		 data : {
+ 	    			statusProduct : status,
+ 	             },
+ 	             url :'RemoveProductBill',
+ 	             success : function(jsonProduct) {
+ 	            	loadProductBill() ;
+                   
+ 	            	
+ 	             }		
+    	})
+   
+    }
+    function createBill() {
+    	
+    	var idBill = $('#idBill').text();
+    	var typePayment = $('#typePayment').val();
+    	
+    	$.ajax ({
+	  		 
+   		 type:'GET',
+   		 headers : {
+					Accept : "application/json; charset=utf-8",
+					"Content-Type" : "application/json; charset=utf-8"
+				},
+   		 dataType :'json',
+   		 data : {
+   			idBill : idBill,
+   			typePayment :typePayment ,
+   			
+            },
+            url :'CreateBillController',
+            success : function(jsonProduct) {
+            	
+            }
+    	
+    })
+    }
+  
+    
+
+    function loadProductBill() {
+    	  $.ajax ({
+		  		 
+	    		 type:'GET',
+	    		 headers : {
+						Accept : "application/json; charset=utf-8",
+						"Content-Type" : "application/json; charset=utf-8"
+					},
+	    		 dataType :'json',
+	    		 data : {
+	    			status : "getData",
+	             },
+	             url :'LoadProductBill',
+	             success : function(jsonProduct) {
+	            		$('#containerListProduct').empty();
+	            		$('#removeProduct').empty();
+	            	        if(jsonProduct =="") {
+	            	        	$('#containerListProduct').empty();
+	            	        }
+	            		for(var i = 0 ; i < jsonProduct.length; i++ ) {
+		            	    var product =  jsonProduct[i];
+		            	 	$('#containerListProduct').append(
+	 	 		 	    			' <div class="card-body">'+
+	 	 		 	    			' <span>'+product.idProduct+'</span>'+
+	 	 		 	    		 '<img  style="width: 40px; height: 40px"'+ 'src=dist/'+product.image +' class="card-img-top"  alt="..." />'+
+	 	 		 	    	         ' <span class="col-md-4">'+product.nameProduct+'</span>'+
+	 	 		 	    	         ' <input type="number" style="width: 60px"  min="1" value='+product.quantityPurchase+' id="'+product.idProduct+'" oninput=" return checkQuantity('+"'"+product.idProduct+"','maxProduct"+i+"',"+
+	 	 		 	    	        		 "'priceDf"+i+"',"+"'priceProduct"+i+"'"+')">'+
+	 	 		 	    	         
+	 	 		 	    	          '<p '+'id='+'"maxProduct'+i+'"'+' hidden>'+product.quantitySale+'</p>'+
+	 	 		 	    	        '<p '+'id="priceDf'+i+'"'+'  hidden>'+product.price+'</p>'+
+	 	 		 	    	         '  <span style="margin-left: 20px" id="priceProduct'+i+'">'+product.price+'</span>'+
+	 	 		 	    	         '<span>VND</span>'+
+	 	 		 	    	         ' <a href="#!" class="btn btn-light float-right"'+ 'onclick="return removeProduct('+"'"+product.idProduct+"')"+'"'+
+	 	 		 	    	         '><i class="far fa-trash-alt"></i></a>'+
+	 	 		 	                 '</div>'
+	 	 		 	                )
+		            	    
+		            	}
+	            		$('#removeProduct').append(
+	            				'<a href="#!" class="btn btn-danger" onclick="return removeAllProduct() ">Xóa tất cả</a>'+
+	            				'<a href="#!" class="btn btn-primary float-right" onclick="return submitBill()">Hoàn tất</a>'
+	            		)
+	            	
+	            	
+	             }		
+ 	})
+    }  
+  function submitBill() {
+	  var sqlDatetime = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000).toJSON().slice(0, 19).replace('T', ' ');
+	  $('#bill-at').text(sqlDatetime);
+	  
+	  $.ajax ({
+	  		 
+ 		 type:'GET',
+ 		 headers : {
+					Accept : "application/json; charset=utf-8",
+					"Content-Type" : "application/json; charset=utf-8"
+				},
+ 		 dataType :'json',
+ 		 data : {
+ 			status : "getData",
+          },
+          url :'LoadProductBill',
+          success : function(jsonProduct) {
+         		$('#bodyBill').empty();
+         	        if(jsonProduct =="") {
+         	        	$('#bodyBill').empty();
+         	        }else {
+         	       
+         	        	
+         	        	 var totolCost  = 0;
+              			for(var i = 0 ; i < jsonProduct.length; i++ ) {
+     	            	    var product =  jsonProduct[i];
+     	            	    totolCost+= (product.price);
+     	            	    
+     	            	    $('#bodyBill').append(
+     	            	    		
+     	            	    	   ' <tr>'+
+     	                           ' <td>'+(i+1)+'</td>'+
+     	                           '<td>'+product.idProduct+'</td>' +
+     	                           '<td>'+product.nameProduct+'</td>' +
+     	                           ' <td>'+product.quantityPurchase+'</td>'+
+     	                           ' <td id="savePriceBill">'+product.price+'</td>'+
+     	                         '</tr>' 
+     	            	    )
+     	            	}
+
+              			$('#totalTmp').text(totolCost);
+              			$('#total').text(totolCost);
+              			var idBill = "#"+randomIdBill();
+              		   $('#idBill').text(idBill);
+              		   $('#div-option').append(
+     '<a href="printBill.html"  rel="noopener"   target="_blank"   class="btn btn-default" ><i class="fas fa-print"></i> Print</a  >'+ 
+         '<button type="button" id="btnStartPayment" class="btn btn-success float-right" data-toggle="modal" data-target="#paymentBill" onclick="paymentSubmit()">'    +
+                   '<i class="far fa-credit-card"></i>Thanh toán  </button>'     
+              		   
+              		   
+              		   
+              		   )
+              		 
+          }		
+}
+          
+	
+ 
+
+}  )
+	  $('#containerListProduct').empty();
+	  
+  }
+  
+  
+  
     $(document).ready(function() {
     	
-    
-    	  $("#searchProduct").on('keyup', function() {
+    	  $('#money').on('input',function() {
+    		  var numberOfMoney = $('#money').val();
+    		  var totalBill =$('#totalPayment').text();
+    	     var tmp = parseInt(numberOfMoney) - parseInt(totalBill);
+    	     if(tmp >= 0) {
+    	    	
+    	    	$('#err').text('');
+    	    	
+    	     }else {
+    	    	 $('#err').css('color','red');
+    	    	 $('#err').text('Tiền nhận phải >= số tiền nợ trong hóa đơn!'); 
+    	     }
+    	   
+    	    
+    	  })
+    	
+    	
+    	  $("#searchProduct").on('input', function() {
     			var searchNameProduct = $("#searchProduct").val();
     	            
     			  if($("#searchProduct").val() =="" ) {
@@ -590,44 +613,35 @@
   		            	 if(jsonProduct!= null) {
   		                 	for(var i = 0 ; i < jsonProduct.length; i++ ) {
   	  		            	    var productObject =  jsonProduct[i];
-  	                               console.log(productObject)
+  	                             
   	  		            	    $('#showListProduct').append(
 
   	  		            	        '<div class="card">'+
   	  		            	       ' <div class="card-body">'+
   	  		            	        '<span>'+productObject.idProduct+'</span>'  +
-  	  		            	         '<img  style="width: 40px; height: 40px"'+ 'src=dist/'+productObject.image +'class="card-img-top"  alt="..." />'+ 
+  	  		            	         '<img  style="width: 40px; height: 40px"'+ 'src=dist/'+productObject.image +' class="card-img-top"  alt="..." />'+ 
   	  		            	       '<span class="col-md-4">'+productObject.nameProduct+'</span>' +  
-  	  		            	         ' <a href="#!" class="btn btn-light float-right" ><i class="bi bi-plus"></i ></a>'+
+  	  		            	         ' <a href="#!" class="btn btn-light float-right "  onclick = "return addProduct('+"'"+productObject.idProduct+"'"+')"><i class="fas fa-plus"></i ></a>'+
   	  		            	      ' </div>' +
   	  		            	      '</div>'
 
 
   	  		            	    )
+  	  		            	
   	  		            	  
   	  		            	}
   		            	 }else {
   		            		 $('#showListProduct').empty(); 
-  		            	 }
-  		      
+  		            	 }	      
   		            	
   		             }
 
                 }) 
-    		     
-    	
-    			
-    			 
-        		  	
-        			  
-        		  
-    	 
+  	 
     	  })
  
     })
     
-
-
       function hidePayment() {
         var payment = $("#typePayment").val();
         if (payment == "cash") {

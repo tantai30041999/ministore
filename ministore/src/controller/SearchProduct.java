@@ -33,10 +33,10 @@ public class SearchProduct extends HttpServlet {
 			throws ServletException, IOException {
 
 		String nameProduct = request.getParameter("nameProduct");
-		System.out.println(nameProduct);
+	
 		if(nameProduct.length() > 0) {
 		ArrayList<Product> list = new ArrayList<Product>();
-		list = (ArrayList<Product>) ProductDAO.getListProductByName(nameProduct);
+		list = (ArrayList<Product>) ProductDAO.getListProducSaletByName(nameProduct);
 		System.out.println(list);
 		PrintWriter out = response.getWriter();
 		Gson gson = new Gson();
@@ -50,7 +50,8 @@ public class SearchProduct extends HttpServlet {
 	
 		System.out.println(json);
 		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
+		 response.setCharacterEncoding("UTF8");
+		 
 		out.print(json);
 		out.close();
 		}

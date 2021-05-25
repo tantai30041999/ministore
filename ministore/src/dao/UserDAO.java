@@ -10,6 +10,33 @@ import db.ConnectionDB;
 import util.MD5;
 
 public class UserDAO {
+	
+	
+	public static String getIdUser(String email) {
+		String idUser = "";
+		String sql = "select idUser  from userstore where email=?";
+		Connection con = null;
+
+		try {
+			con = ConnectionDB.connect();
+			PreparedStatement pre = con.prepareStatement(sql);
+			pre.setString(1, email);
+			ResultSet rs = pre.executeQuery();
+			while (rs.next()) {
+				idUser = rs.getString("idUser");
+			}
+		} catch (ClassNotFoundException e) {
+
+			e.printStackTrace();
+			ConnectionDB.pool.releaseConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ConnectionDB.pool.releaseConnection(con);
+		}
+		ConnectionDB.pool.releaseConnection(con);
+		return idUser;
+	}
 	public static String getUserIdLast() {
 		String idUserLast = "";
 		String sql = "select idUser  from userstore order by idUser desc  limit 1";
@@ -85,6 +112,6 @@ public class UserDAO {
 	}
 
 	public static void main(String[] args) throws NoSuchAlgorithmException {
-           System.out.println(countStaff());
+           System.out.println(getIdUser("ilovetai30@gmail.com"));
 	}
 }

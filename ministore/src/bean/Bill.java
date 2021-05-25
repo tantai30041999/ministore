@@ -10,9 +10,12 @@ public class Bill {
 	private boolean statusPayment;
 	private String typePayment;
 	private double VAT;
-	private ArrayList<Product> listProduct;
+	public static ArrayList<Product> listProduct = new ArrayList<Product>();
 	private User user;
 
+	public Bill() {
+		
+	}
 	public Bill(String idBill, Date createDate, double total, boolean statusPayment, String typePayment, double vAT,ArrayList<Product> listProduct, User user) {
 		super();
 		this.idBill = idBill;
@@ -87,6 +90,11 @@ public class Bill {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	@Override
+	public String toString() {
+		return "Bill [idBill=" + idBill + ", createDate=" + createDate + ", total=" + total + ", statusPayment="
+				+ statusPayment + ", typePayment=" + typePayment + ", VAT=" + VAT + ", user=" + user + "]";
 	}
 	
 	

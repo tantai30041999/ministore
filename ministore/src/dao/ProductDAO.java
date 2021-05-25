@@ -5,8 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import bean.Product;
@@ -15,6 +15,139 @@ import db.ConnectionDB;
 public class ProductDAO {
 	 public static int productDisplay = 10;
 
+	 
+	 public static int countProductByIdSupplier(String idSupplier) throws ClassNotFoundException, SQLException {
+		 int count  = 0;
+		 String sql = "select count(*)  as countProduct from product where idSupplier=?";
+		 Connection con = null;
+		 con = ConnectionDB.connect();
+		 
+		 PreparedStatement pre = con.prepareStatement(sql);
+		 pre.setString(1, idSupplier);
+		 ResultSet rs= pre.executeQuery();
+		 while(rs.next()) {
+			 count = rs.getInt("countProduct");
+		 }
+		 
+		 ConnectionDB.pool.releaseConnection(con);
+		 return count;
+	 }
+	 public static ArrayList<Product> getListByFilter(int filter) throws ClassNotFoundException, SQLException {
+		 String sql ="SELECT * FROM product  AS p INNER JOIN typeproduct AS tp ON p.idType = tp.idType where activity = 0  order by quantityInStock desc limit ?";
+		 ArrayList<Product> list =  null;
+		 Connection con = null;
+		 
+		 
+		   con = ConnectionDB.connect();
+           PreparedStatement pre = con.prepareStatement(sql);
+           pre.setInt(1, filter);
+           ResultSet rs = pre.executeQuery();
+           list = new ArrayList<Product>();
+           while (rs.next()) {
+               String idProduct = rs.getString("idProduct");
+               String nameProduct = rs.getString("nameProduct");
+               double price = rs.getInt("priceProduct");
+               double sale = rs.getDouble("sale");
+               int quantitySell = rs.getInt("quantitySell");
+               int quantityInStock = rs.getInt("quantityInStock");
+               String image = rs.getString("image");
+               String typeProduct = rs.getString("typeName");
+               Date expiration = rs.getDate("expiration");
+               boolean active = ((rs.getInt("activeProduct") == 1) ? true : false);
+               double VAT = rs.getDouble("VAT");
+               boolean activity =rs.getInt("activity")==1 ? true: false;
+               list.add(new Product(idProduct, nameProduct, price,quantitySell,quantityInStock, sale, image, typeProduct, expiration, active, VAT,activity));
+				 
+           } 
+		 
+           ConnectionDB.pool.releaseConnection(con);
+		 return list;
+	 }
+	 
+
+	 
+	 
+	 
+	 public static boolean updateProductAfterSale(String idProduct, int quantityPurchare) {
+		 String sql = "UPDATE product set quantitySell=? where idProduct=?";
+		 Product p = getProductById(idProduct);
+	    	Connection con = null;
+	    	
+	    	
+	    	try {
+				con = ConnectionDB.connect();
+				PreparedStatement pre = con.prepareStatement(sql);
+				int updateQuantitySale = p.getQuantitySale() - quantityPurchare;
+				if(updateQuantitySale < 0) {
+					return false;
+				}
+				pre.setInt(1, updateQuantitySale);
+				pre.setString(2, idProduct);
+			
+				
+				int update = pre.executeUpdate();
+				if(update == 1) {
+					return true;
+				}
+			} catch (ClassNotFoundException | SQLException e) {
+				
+				e.printStackTrace();
+				  ConnectionDB.pool.releaseConnection(con);
+			}
+	    	return false;
+	 }
+	 public static boolean checkExist(String idProduct, ArrayList<Product> listProduct) {
+		 for(Product p : listProduct) {
+			 if(p.getIdProduct().equals(idProduct)) {
+				return true;
+				
+			 }
+		 }
+		 return false;
+	 }
+	
+	 public static ArrayList<Product> deleteProductFromCart(String status ,ArrayList<Product> cart) {
+		   ArrayList<Product> cartClone = new ArrayList<Product>();
+		   cartClone = (ArrayList<Product>) cart.clone();
+		 if(status.equals("removeAll")) {
+			   cartClone.clear();
+		 }else {
+			   Iterator<Product> i = cartClone.iterator();
+			   while(i.hasNext()) {
+				   Product p = i.next();
+				   if(p.getIdProduct().equals(status)) {
+					   i.remove();
+				   }
+			   }
+		 }
+		
+		 return cartClone;
+		
+	 }
+	 
+	 public static ArrayList<Product> increateQuantityPurches(String idProduct, ArrayList<Product> listProduct) {
+		
+		 for(Product p : listProduct) {
+			 if(p.getIdProduct().equals(idProduct)) {
+				 int priceDf = getPriceById(idProduct);
+				  System.out.println(priceDf+"ABCDDD");
+				 p.setQuantityPurchase(p.getQuantityPurchase()+1);
+				 p.setPrice(p.getQuantityPurchase()*priceDf);
+				 
+				break;
+			 }
+		 }
+		 return listProduct;
+		
+	 }
+	 public static  int getPriceById(String idProduct) {
+		 for(Product p : getAllProductSale()) {
+			 if(p.getIdProduct().equals(idProduct)) {
+				 return (int) p.getPrice();
+			 }
+ 		 }
+		 return 0;
+	 }
 	 public static List<Product> getAllProductInStock() {
 		  String sql = "SELECT * FROM `product` AS p INNER JOIN typeproduct AS tp ON p.idType = tp.idType where activity=0";
 	        Connection con = null;
@@ -51,6 +184,8 @@ public class ProductDAO {
 	        ConnectionDB.pool.releaseConnection(con);
 	        return listProduct;
 	 }
+	 
+	
 	 public static List<Product> getAllProductSale() {
 		  String sql = "SELECT * FROM `product` AS p INNER JOIN typeproduct AS tp ON p.idType = tp.idType where activity=1";
 	        Connection con = null;
@@ -123,11 +258,49 @@ public class ProductDAO {
 	        ConnectionDB.pool.releaseConnection(con);
 	        return listProduct;
 	    }
-	    
+
+	    public static List<Product> getListProducSaletByName(String nameProduct) {
+	    	String sql ="select * FROM product AS p JOIN typeproduct AS tp ON p.idType = tp.idType  where activity=? and  nameProduct like?";
+	    	Connection con = null;
+	    	Product product = null;
+	    	ArrayList<Product> list = null;
+	    	try {
+				con = ConnectionDB.connect();
+				PreparedStatement pre = con.prepareStatement(sql);
+				pre.setInt(1, 1);
+				pre.setString(2, nameProduct+"%");
+				ResultSet rs = pre.executeQuery();
+				list = new ArrayList<Product>();
+				  while (rs.next()) {
+		                String idProduct = rs.getString("idProduct");
+		                String nameP = rs.getString("nameProduct");
+		                double price = rs.getInt("priceProduct");
+		                double sale = rs.getDouble("sale");
+		                int quantitySell = rs.getInt("quantitySell");
+		                int quantityInStock = rs.getInt("quantityInStock");
+		                String image = rs.getString("image");
+		                String typeProduct = rs.getString("typeName");
+		                Date expiration = rs.getDate("expiration");
+		                boolean active = ((rs.getInt("activeProduct") == 1) ? true : false);
+		                double VAT = rs.getDouble("VAT");
+		                boolean activity =rs.getInt("activity")==1 ? true: false;
+		                list.add(new Product(idProduct, nameP, price,quantitySell,quantityInStock, sale, image, typeProduct, expiration, active, VAT,activity));
+		            }
+				
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				 ConnectionDB.pool.releaseConnection(con);
+			}
+	    	 ConnectionDB.pool.releaseConnection(con);
+	    	return list;
+	    			
+	    			
+	    }
 	    
 	    
 	    public static List<Product> getListProductByName(String nameProduct) {
-	    	String sql ="select * FROM product AS p JOIN typeproduct AS tp ON p.idType = tp.idType  where nameProduct like?";
+	    	String sql ="select * FROM product AS p JOIN typeproduct AS tp ON p.idType = tp.idType  where  nameProduct like?";
 	    	Connection con = null;
 	    	Product product = null;
 	    	ArrayList<Product> list = null;
@@ -195,6 +368,7 @@ public class ProductDAO {
 	            System.out.print(e.getMessage());
 	            ConnectionDB.pool.releaseConnection(con);
 	        }
+	        ConnectionDB.pool.releaseConnection(con);
 	        return product;
 	    }
 
@@ -426,13 +600,18 @@ public class ProductDAO {
 	    }
 
 
-	    public static void main(String[] args) {
+	    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+	    	
+	
+	    	System.out.println(countProductByIdSupplier("NCC0044"));
 //	    	int [] x= getLimitePage(10);
 //	    	for(Integer i : x) {
 //	    		System.out.println(i);
 //	    	}
-	    	System.out.println(updateProductSale("SP00001", 0, 34,1));
-//	    	for(Product p : getListProductPage(2)) {
+	    	
+//	    	System.out.println(getPriceById("SP00001"));
+//	    	System.out.println(updateProductSale("SP00001", 0, 34,1));
+//	    	for(Product p :getListByFilter(5)) {
 //	    		System.out.println(p.getIdProduct());
 //	    	}
 //	    	System.out.println(getAllProductInStock().size());

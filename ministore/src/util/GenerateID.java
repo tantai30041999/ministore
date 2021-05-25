@@ -1,10 +1,25 @@
 package util;
 
+import java.util.Random;
+
 import dao.StoreDAO;
 import dao.SupplierDAO;
 import dao.UserDAO;
 
 public class GenerateID {
+	
+    public static String generateIDBillDetail() {
+    	String id = "";
+    	
+    	Random r = new Random();
+    	for(int i = 0 ; i < 7 ;i++) {
+    	    int number = r.nextInt(9);
+    	    id+=number;
+    		
+    	}
+    	return id;
+    	
+    }
     public static String generateIDSupplier() {
     	String idSupplier = "";
     	String idSupplierLast = SupplierDAO.getLastIdSupplier();
@@ -49,7 +64,7 @@ public class GenerateID {
     	return idStore;
     }
     public static void main(String[] args) {
-    	System.out.println(generateIDSupplier());
+    	System.out.println(generateIDBillDetail());
 		
 	}
 }
