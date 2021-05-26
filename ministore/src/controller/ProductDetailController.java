@@ -31,14 +31,15 @@ public class ProductDetailController extends HttpServlet {
           
 		String idProduct = request.getParameter("idProduct");
 		Product product = ProductDAO.getProductById(idProduct);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(product);
 		System.out.println(json);
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
+		
 		out.print(json);
 		out.close();
 		

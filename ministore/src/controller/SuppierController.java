@@ -37,6 +37,8 @@ public class SuppierController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
      HttpSession session = request.getSession();
      User user = (User) session.getAttribute("user");
+   	request.setCharacterEncoding("UTF-8");
+  	response.setCharacterEncoding("UTF-8");
      if(user != null) {
     	  
     	 ArrayList<Supplier> listSupplier = new ArrayList<Supplier>();

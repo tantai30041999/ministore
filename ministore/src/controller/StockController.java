@@ -44,6 +44,8 @@ public class StockController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		   HttpSession session = request.getSession();
 		     User user = (User) session.getAttribute("user");
+		   	request.setCharacterEncoding("UTF-8");
+		  	response.setCharacterEncoding("UTF-8");
 		     if(user != null) {
 		    	 ArrayList<Product> listProductInStock = new ArrayList<Product>();
 		    	 ArrayList<TypeProduct> listType = new ArrayList<TypeProduct>();

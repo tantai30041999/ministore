@@ -16,13 +16,39 @@ public class Product {
 	private double VAT;
 	private boolean activity;
 	private int quantityPurchase;
+	private String idSupplier;
 
 	public Product() {
 
 	}
+
+	public String getIdSupplier() {
+		return idSupplier;
+	}
+
+	public void setIdSupplier(String idSupplier) {
+		this.idSupplier = idSupplier;
+	}
+
+	public Product(String idProduct, String nameProduct, double price, int quantitySale, int quantityInStock,
+			double sale, String image, String typeProduct, Date expiration, boolean active, double vAT,
+			boolean activity, String idSupplier) {
+		super();
+		this.idProduct = idProduct;
+		this.nameProduct = nameProduct;
+		this.price = price;
+		this.quantitySale = quantitySale;
+		this.quantityInStock = quantityInStock;
+		this.sale = sale;
+		this.image = image;
+		this.typeProduct = typeProduct;
+		this.expiration = expiration;
+		this.active = active;
+		VAT = vAT;
+		this.activity = activity;
 	
-
-
+		this.idSupplier = idSupplier;
+	}
 
 	public Product(String idProduct, String nameProduct, double price, int quantitySale, int quantityInStock,
 			double sale, String image, String typeProduct, Date expiration, boolean active, double vAT,
@@ -43,9 +69,6 @@ public class Product {
 		this.quantityPurchase = quantityPurchase;
 	}
 
-
-
-
 	public Product(String idProduct, String nameProduct, double price, int quantitySale, int quantityInStock,
 			double sale, String image, String typeProduct, Date expiration, boolean active, double vAT,
 			boolean activity) {
@@ -63,7 +86,6 @@ public class Product {
 		VAT = vAT;
 		this.activity = activity;
 	}
-	
 
 	public boolean isActivity() {
 		return activity;
@@ -73,11 +95,9 @@ public class Product {
 		return quantityPurchase;
 	}
 
-
 	public void setQuantityPurchase(int quantityPurchase) {
 		this.quantityPurchase = quantityPurchase;
 	}
-
 
 	public void setActivity(boolean activity) {
 		this.activity = activity;
@@ -173,10 +193,13 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [idProduct=" + idProduct + ", nameProduct=" + nameProduct + ", price=" + price + ", sale="
-				+ sale + ", image=" + image + ", typeProduct=" + typeProduct + ", expiration=" + expiration
-				+ ", active=" + active + ", VAT=" + VAT + ", activity=" + activity + ", quantityPurchase="
-				+ quantityPurchase + "]";
+		return "Product [idProduct=" + idProduct + ", nameProduct=" + nameProduct + ", price=" + price
+				+ ", quantitySale=" + quantitySale + ", quantityInStock=" + quantityInStock + ", sale=" + sale
+				+ ", image=" + image + ", typeProduct=" + typeProduct + ", expiration=" + expiration + ", active="
+				+ active + ", VAT=" + VAT + ", activity=" + activity + ", quantityPurchase=" + quantityPurchase
+				+ ", idSupplier=" + idSupplier + "]";
 	}
+
+
 
 }

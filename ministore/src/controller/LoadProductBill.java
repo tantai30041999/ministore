@@ -37,6 +37,8 @@ public class LoadProductBill extends HttpServlet {
 	   
 	   User u = (User) session.getAttribute("user");
 	   String status = request.getParameter("status");
+	   response.setContentType("application/json");
+	    response.setCharacterEncoding("UTF8");
 	   if(u!= null) {
 		   if(status.equals("getData")) {
 		   ArrayList<Product> list = (ArrayList<Product>) session.getAttribute("cart");
@@ -53,8 +55,7 @@ public class LoadProductBill extends HttpServlet {
 		   }
 		   
 		   PrintWriter out = response.getWriter();
-		    response.setContentType("application/json");
-		    response.setCharacterEncoding("UTF8");
+		  
 		    out.write(json);
 		    out.close();
 		   }  

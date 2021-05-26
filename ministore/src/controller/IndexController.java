@@ -34,7 +34,8 @@ public class IndexController extends HttpServlet {
 	   int numberOfStaff = UserDAO.countStaff();
 	   int numberOfTypeProduct = ProductDAO.countTypeProduct();
 	   int productInStock = ProductDAO.countProductInStock(0);
-	   
+	   request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF8");
 	   ArrayList<Integer> listCount= new ArrayList<Integer>();
 	   listCount.add(numberOfTypeProduct);
 	   listCount.add(numberOfSupplier);

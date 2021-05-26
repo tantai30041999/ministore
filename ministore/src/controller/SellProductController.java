@@ -39,7 +39,8 @@ public class SellProductController extends HttpServlet {
 	      HttpSession session = request.getSession();
 	      User u = (User) session.getAttribute("user");
 	      ArrayList<Product> listProductCart ;
-	      
+	  	request.setCharacterEncoding("UTF-8");
+	  	response.setCharacterEncoding("UTF-8");
 	      if(u!= null) {
 	    	  listProductCart = new ArrayList<Product>();
 	    	  session.setAttribute("cart",listProductCart);

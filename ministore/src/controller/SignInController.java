@@ -34,12 +34,12 @@ public class SignInController extends HttpServlet {
 	 
 		 String userName = request.getParameter("email");
 		 String pass = request.getParameter("password");
-		 System.out.println(userName);
-		 System.out.println(pass);
+		
 		 SignInDao signInDao = new SignInDao();
 		 HttpSession session = null;
 		 User user = null;
-		 
+		  	request.setCharacterEncoding("UTF-8");
+		  	response.setCharacterEncoding("UTF-8");
 		 try {
 			 session = request.getSession();
 			 user= (User) session.getAttribute("user");

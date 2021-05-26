@@ -39,7 +39,7 @@
             <div class="card">
               <div class="card-header">
                 <a class="btn btn-primary" href="#" role="button">Nhập hàng</a>
-                <button type="button" class="btn btn-secondary">Xuất file(.xls)</button>
+                <button type="button" class="btn btn-secondary" onclick="exportStockExel()">Xuất file(.xls)</button>
                 <div class="input-group rounded col-md-6 float-right">
                   <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
                     aria-describedby="search-addon" />
@@ -118,18 +118,22 @@
           <div class="col-md-12">
             <div class="card card-primary">
          
+         
+              <form action=<%=Util.getFullPath("EditProductStockController") %> method="POST" onsubmit="return validation()">
               <div class="card-body">
                 <div class="form-group">
+                 <input type="hidden" id="idProduct" name="idProduct">
                   <label for="nameProduct">Tên sản phẩm</label>
-                  <input type="text" id="nameProduct" class="form-control">
+                  <input type="text" id="nameProduct" name="nameProduct" class="form-control">
+                     <span id="error"></span>
                 </div>
                 <div class="form-group">
                   <label for="priceProduct">Giá(VND)</label>
-                  <input type="number" id="priceProduct" class="form-control">
+                  <input type="number" id="priceProduct" name="priceProduct" class="form-control" min="0">
                 </div>
                 <div class="form-group">
                   <label for="saleProduct">Khuyến mãi(%)</label>
-                  <input type="number" id="saleProduct" class="form-control">
+                  <input type="number" id="saleProduct" name="saleProduct" class="form-control" min="0" max="100">
                 </div>
   
                 <div class="form-group">
@@ -140,19 +144,16 @@
   
                 <div class="form-group">
                   <label for="taxes">Thuế(VAT)</label>
-                  <input type="number" id="taxes" class="form-control">
+                  <input type="number" id="taxes" class="form-control" name="vatProduct" min="0" max="100">
                 </div>
-                <div class="form-group">
-                  <label for="imageProduct">Hình ảnh</label>
-                  <input type="file" id="imageProduct" class="form-control">
-                </div>
+              
                 <div class="form-group">
                   <label for="inputClientCompany">Loại</label>
                   
                   <%ArrayList<TypeProduct> listType =(ArrayList<TypeProduct>) request.getAttribute("listType");
                 		 ArrayList<Supplier> listSp = ( ArrayList<Supplier>)request.getAttribute("listSupplier") ;
                 		  %>
-                  <select class="form-control">
+                  <select class="form-control" id="listTypeProduct" name="typeProduct">
                   
                   <%  for( int i = 0; i < listType.size(); i++) { %>
                     <option value=<%= listType.get(i).getIdType()  %>> <%= listType.get(i).getNameType() %></option>
@@ -162,9 +163,9 @@
   
                 <div class="form-group">
                   <label >Nhà cung cấp</label>
-                   <select class="form-control">
+                   <select class="form-control" id="listSupplier" name="supplier">
                    <%  for( int i = 0; i < listSp.size(); i++) { %>
-                    <option value=<%= listSp.get(i).getIdSupplier()  %>> <%= listSp.get(i).getNameSupplier() %></option>
+                    <option value=<%= listSp.get(i).getIdSupplier()  %>><%= listSp.get(i).getNameSupplier() %></option>
                     <%} %>
                      </select>
                 </div>
@@ -172,8 +173,9 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-primary">Cập nhật</button>
+                <input type="submit" class="btn btn-primary" value="Cập nhật">
               </div>
+              </form>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -194,17 +196,29 @@
 </div>
 <!-- ./wrapper -->
 
-<script>
+<script type="text/javascript" charset="utf-8">
 
 
 
 
 function showDetail(idProduct) {
+	 $('#nameProduct').on('keyup', function() {
+		 if($("#nameProduct").val() =="") {
+				$('#error').css('color','red');
+				$('#error').text('Tên sản phẩm không được bỏ trống');
+				
+				
+			}else {
+
+				$('#error').text('');
+				
+			}
+	 })
 	
 $.ajax( {
 		 type:'GET',
 		 headers : {
-				Accept : "application/json; charset=utf-8",
+				"Accept" : "application/json; charset=utf-8",
 				"Content-Type" : "application/json; charset=utf-8"
 			},
 		 dataType :'json',
@@ -221,19 +235,71 @@ $.ajax( {
        	var quantityInStock = jsonProduct.quantityInStock;
         var expirtation = jsonProduct.expiration;
         var taxes = jsonProduct.VAT;
-        var img = jsonProduct.imageProduct;
+        var type = jsonProduct.typeProduct;
+        var supplier = jsonProduct.idSupplier;
         
+      
+             
+             $('#idProduct').val(idProduct);
             $('#nameProduct').val(nameProduct);
             $('#priceProduct').val(priceSale);
             $('#saleProduct').val(sale);
             $('#quantityProduct').val(quantityInStock);
             $('#expirtation').val(expirtation);
-           // $('#imageProduct').val(img);
-           
-       	
+            $('#taxes').val(taxes);
+            
+            
+            
+            
+            $('#listTypeProduct option').each(function() {
+          	     
+            	var tmp = $(this).text().trim();
+            	
+            	
+            	if(tmp == type) {
+            		console.log('a')
+            		
+            		$(this).attr('selected','selected');
+            		 return ;
+            	}
+        
+            	
+            })
+            
+       
+            $('#listSupplier option').each(function() {
+            	  
+            	var tmp = $(this).val();
+            	if(tmp == supplier) {
+            	
+            		console.log($(this).text())
+            		$(this).attr('selected','selected');
+            		 return ;
+            	}
+        
+            	
+            })
+            
+       
         }
-		 
+     
 	 })
+}
+function validation() {
+	if($("#nameProduct").val() =="") {
+		$('#error').css('color','red');
+		$('#error').text('Tên sản phẩm không được bỏ trống');
+		
+		return false;
+	}
+	
+	
+	return true;
+	
+}
+
+function exportStockExel() {
+	
 }
 </script>
 </body>

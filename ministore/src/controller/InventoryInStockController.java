@@ -36,6 +36,8 @@ public class InventoryInStockController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		if(user!= null) {
 			
 			ArrayList<Product> listProductInStock = (ArrayList<Product>) ProductDAO.getAllProductInStock();

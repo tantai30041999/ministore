@@ -9,7 +9,7 @@ public class ConnectionDB {
     public static Connection connect() throws ClassNotFoundException, SQLException, SQLException {
         Connection con = null;
         if (pool == null) {
-            pool = BasicConnectionPool.create("jdbc:mysql://localhost:3306/ministore?useUnicode=true&characterEncoding=utf-8", "root", "tantai123");
+            pool = BasicConnectionPool.create("jdbc:mysql://localhost:3306/ministore?useUnicode=true&characterEncoding=UTF8", "root", "tantai123");
         }
         con = pool.getConnection();
 

@@ -35,11 +35,12 @@ public class Profile extends HttpServlet {
 	 
 		HttpSession session = request.getSession();
 		User u = (User) session.getAttribute("user");
-		
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF8");
 		if(u != null) {
 			
 			session.setAttribute("user", u);
-			request.setCharacterEncoding("UTF-8");
+		
 			System.out.println(u.getName());
 			request.getRequestDispatcher("profile.jsp").forward(request, response);
 		}else {

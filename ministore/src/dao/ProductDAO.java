@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -244,7 +245,8 @@ public class ProductDAO {
 	                boolean active = ((rs.getInt("activeProduct") == 1) ? true : false);
 	                double VAT = rs.getDouble("VAT");
 	                boolean activity =rs.getInt("activity")==1 ? true: false;
-	                listProduct.add(new Product(idProduct, nameProduct, price,quantitySell,quantityInStock, sale, image, typeProduct, expiration, active, VAT,activity));
+	                String idSupplier = rs.getString("idSupplier");
+	                listProduct.add(new Product(idProduct, nameProduct, price,quantitySell,quantityInStock, sale, image, typeProduct, expiration, active, VAT,activity,idSupplier));
 	            }
 	        } catch (ClassNotFoundException e) {
 	            e.printStackTrace();
@@ -359,6 +361,7 @@ public class ProductDAO {
 	            product.setActive(((rs.getInt("activeProduct") == 1) ? true : false));
 	            product.setVAT(rs.getDouble("VAT"));
 	            product.setActivity(((rs.getInt("activity")==1 )? true: false));
+	            product.setIdSupplier((rs.getString("idSupplier")));
 	        } catch (ClassNotFoundException e) {
 	            e.printStackTrace();
 	            System.out.print(e.getMessage());
@@ -603,12 +606,12 @@ public class ProductDAO {
 	    public static void main(String[] args) throws ClassNotFoundException, SQLException {
 	    	
 	
-	    	System.out.println(countProductByIdSupplier("NCC0044"));
+	    	
 //	    	int [] x= getLimitePage(10);
 //	    	for(Integer i : x) {
 //	    		System.out.println(i);
 //	    	}
-	    	
+//	    	System.out.println(getProductById("SP00001"));
 //	    	System.out.println(getPriceById("SP00001"));
 //	    	System.out.println(updateProductSale("SP00001", 0, 34,1));
 //	    	for(Product p :getListByFilter(5)) {
@@ -618,11 +621,11 @@ public class ProductDAO {
 	        
 //	        System.out.println(numberOfPage());
 	    	
-//	        insertProduct("SP00101","Hello",50000,100,25,Date.valueOf(LocalDate.now()),1,0.0,0.0,"","NCC0053","ST0001","TYPE0008",1);
+// insertProduct("SP00101","Hello",50000,100,25,Date.valueOf(LocalDate.now()),1,0.0,0.0,"","NCC0053","ST0001","TYPE0008",1);
 //	        removeProduct("SP00101");
 //	    	System.out.println(countProductInStock(0));
          
-//	        updateProduct("SP00101","Hello World",50000,100,25,Date.valueOf(LocalDate.now()),1,0.0,0.0,"","NCC0053","ST0001","TYPE0008",1);
+   updateProduct("SP00101","Hello World",50000,100,25,Date.valueOf(LocalDate.now()),1,0.0,0.0,"","NCC0053","ST0001","TYPE0008",1);
 //	        System.out.println(localDate);
 	    }
 
